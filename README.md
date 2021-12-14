@@ -1,5 +1,3 @@
 # Cryptomarca
 
 ## Proyecto web
-
-prueba
