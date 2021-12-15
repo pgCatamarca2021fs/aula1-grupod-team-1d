@@ -6,6 +6,14 @@
   color: white;
 }
 
+.barra-navegacion{
+  height: 75px;
+}
+
+.logo{
+  font-size: 30px;
+}
+
 .hoverable-card:hover {
   transform: scale(1.2);
   z-index: 9;
