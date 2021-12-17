@@ -1,19 +1,18 @@
 /*CABEZERA*/
 .inicio-sesion:hover,
-.regsitrate:hover{
+.regsitrate:hover {
   background-color: #0d6efd;
-  transition: all .5s;
+  transition: all 0.5s;
   color: white;
 }
 
-.barra-navegacion{
+.barra-navegacion {
   height: 75px;
 }
 
-.logo{
+.logo {
   font-size: 30px;
 }
-
 
 /* Tarjetas con efecto on hover */
 .hoverable-card:hover {
@@ -22,5 +21,43 @@
 }
 
 .hoverable-card {
-  transition: .3s;
+  transition: 0.3s;
+}
+
+/*********************************/
+
+/*FOOTER*/
+
+.footer {
+  height: 700px;
+  width: 100%;
+  background: rgba(22, 21, 21, 0.993);
+}
+
+.contenedor-footer {
+  height: 90%;
+}
+
+.lista-footer{
+  list-style: none;
+  line-height: 40px;
+}
+
+.lista-item a{
+  text-decoration: none;
+  color: #949494;
+}
+
+.info-footer{
+  font-size: 12px;
+}
+
+.lista-redes{
+  list-style: none;
+  margin-top: 120px;
+}
+
+.titulo-footer{
+  position: relative;
+  top: 40%;
 }
