@@ -40,12 +40,17 @@
   transition: 0.3s;
 }
 
+/* ROTAR TEXTO */
+
+.rotate-text {  
+      transform: rotate(90deg);            
+}
+
 /*********************************/
 
 /*FOOTER*/
 
-.footer {
-  height: 700px;
+.footer {  
   width: 100%;
   background: rgba(22, 21, 21, 0.993);
 }
@@ -56,16 +61,18 @@
 
 .lista-footer{
   list-style: none;
-  line-height: 40px;
+  line-height: 40px;  
+  padding-left: 0;
 }
 
 .lista-item a{
   text-decoration: none;
   color: #949494;
+  
 }
 
 .info-footer{
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 .lista-redes{
