@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InicioComponent } from './inicio/inicio.component';
+import { ValoresComponent } from './inicio/valores/valores.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InicioComponent,
+    ValoresComponent
+  ],
   imports: [
     CommonModule
   ]
