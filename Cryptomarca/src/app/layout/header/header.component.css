@@ -1,0 +1,59 @@
+/*CABEZERA*/
+.inicio-sesion:hover,
+.regsitrate:hover {
+  background-color: #0d6efd;
+  transition: all 0.5s;
+  color: white;
+}
+
+@media only screen and (min-width: 600px) {
+  .btn2 {
+      display: none;
+  }
+}
+
+.bg{
+    background-color: black;
+}
+
+.dots{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lol{
+  margin: 4rem -1rem;
+}
+
+.btn2{
+ 
+  background-color: transparent;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: end;
+  text-decoration: none;
+  display: inline-block;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  
+}
+
+.rompebolas{
+  margin: 4rem 4rem 0.5rem 6rem;
+}
+
+.barra-navegacion {
+  height: 75px;
+  width: 100%;
+}
+
+.logo {
+  font-size: 30px;
+}
+
+.asd{
+  margin: 0rem 1.1rem;
+}
