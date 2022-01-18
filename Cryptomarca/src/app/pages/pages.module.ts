@@ -8,6 +8,7 @@ import { AccesoComponent } from './inicio/acceso/acceso.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AccesoComponent,
     RegistroComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule
