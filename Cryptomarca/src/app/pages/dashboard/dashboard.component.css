@@ -1,0 +1,97 @@
+.main-tabla-billetera,
+.main-tabla-cotizaciones {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    border-radius: .5rem;    
+}
+
+.main-tabla-billetera {
+    background-color: #0d6efd;
+}
+
+.main-tabla-cotizaciones {
+    background-color: #6f42c1;
+}
+
+.tabla-billetera,
+.tabla-cotizaciones{
+    margin: 0 auto;    
+}
+
+table {
+    border-collapse: separate;    
+    border-spacing: 2px;
+    padding: 1rem;
+}
+
+.titulo-tabla-billetera,
+.titulo-tabla-cotizaciones {
+    margin-bottom: 0;    
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 2.3rem;
+    text-align: center;
+    color: white;
+}
+
+.contenedor-tabla-billetera,
+.contenedor-tabla-cotizaciones {
+    width: 90%;
+    min-width: 350px;    
+    min-height: 250px;
+    margin: 0 auto;    
+}
+
+.contenedor-tabla-billetera table,
+.contenedor-tabla-cotizaciones table {
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor-tabla-billetera td,
+.contenedor-tabla-cotizaciones td {
+    width: 50%;
+    font-size: 1.2rem;    
+    line-height: 1.5rem;
+    color: #757575;
+    background-color: #FFFFFF;
+    text-align: left;
+    padding: 1.5rem;
+}
+
+.borde-superior-izquierdo {
+    border-radius: 15px 0 0 0;
+}
+
+.borde-superior-derecho {
+    border-radius: 0 15px 0 0;
+}
+
+.borde-inferior-izquierdo {
+    border-radius: 0 0 0 15px;
+}
+
+.borde-inferior-derecho {
+    border-radius: 0 0 15px 0;
+}
+
+table .celda-derecha {
+    font-size: 1.2rem;    
+    line-height: 1.7rem;
+    color: #757575;
+    text-align: center;
+}
+
+.fecha-tabla {
+    width: max-content;
+    margin: 0 auto;    
+    padding: .5rem;    
+    background-color: #ffcea6;
+    border-radius: .5rem;
+    align-items: center;
+}
+
+.fecha-tabla p {    
+    margin-bottom: 0;
+}
