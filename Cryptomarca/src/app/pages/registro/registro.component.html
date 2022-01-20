@@ -1,16 +1,102 @@
- <div class="container">
-    <div class="row">
-       <div class="col-md-12 register-form-header">
-        <h2 class="login-form-font-header">Registrate</h2>
-       </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 register-form-header">
+      <h2 class="login-form-font-header">Registrate</h2>
     </div>
-
-   <div class="row m-3">
-     <div class="col-md-12 register-Form">
-       <Form formGroup="Form">
-         
-       </Form>
-     </div>
-   </div>
-    
   </div>
+
+  <div class="row m-3">
+    <div class="col-md-12 register-Form">
+      <Form [formGroup]="formRegistro">
+        <div class="m-3">
+          <label for="name" class="form-label">Ingresa tu nombre</label>
+          <input type="name" class="form-control" formControlName="name">
+          <div *ngIf="name?.errors &&name?.touched">
+            <p *ngIf="name?.hasError('required')" class="text-danger">
+              Por favor ingrese su nombre.
+            </p>
+            <p *ngIf="name?.hasError('name')" class="text-danger">
+              Tu nombre debe tener 3 letras o más.
+            </p>
+          </div>
+          <label for="lastname" class="form-label">Ingresa  tu Apellido</label>
+          <input type="lastname" class="form-control" formControlName="lastname">
+          <div *ngIf="lastname?.errors &&lastname?.touched">
+            <p *ngIf="lastname?.hasError('required')" class="text-danger">
+              Por favor ingrese su apellido.
+            </p>
+            <p *ngIf="lastname?.hasError('lastname')" class="text-danger">
+              Tu apellido debe tener 3 letras o más.
+            </p>
+          </div>
+          <label for="dni" class="form-label">Ingresa tu DNI</label>
+          <input type="dni" class="form-control" formControlName="dni">
+          <div *ngIf="dni?.errors &&dni?.touched">
+            <p *ngIf="dni?.hasError('required')" class="text-danger">
+              El Dni es requerido.
+            </p>
+            <p *ngIf="dni?.hasError('dni')" class="text-danger">
+              El formato del dni debe ser válido.
+            </p>
+          </div>
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="mail">
+          <div *ngIf="mail?.errors &&mail?.touched">
+            <p *ngIf="mail?.hasError('required')" class="text-danger">
+              El mail es requerido.
+            </p>
+            <p *ngIf="mail?.hasError('email')" class="text-danger">
+              El formato del Email debe ser válido.
+            </p>
+          </div>
+          <label for="email" class="form-label">Repetir Email</label>
+          <input type="email" class="form-control" formControlName="mailrepeat">
+          <div *ngIf="mailrepeat?.errors &&mailrepeat?.touched">
+            <p *ngIf="mailrepeat?.hasError('required')" class="text-danger">
+              El mail es requerido.
+            </p>
+            <p *ngIf="mailrepeat?.hasError('email')" class="text-danger">
+              Los mails deben coincidir.
+            </p>
+          </div>
+
+
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
+          <div *ngIf="password?.errors &&password?.touched">
+            <p *ngIf="password?.hasError('required')" class="text-danger">
+              La contraseña es requerida.
+            </p>
+            <p *ngIf="password?.hasError('password')" class="text-danger">
+              La contraseña requiere 8 carácteres mínimo.
+            </p>
+          </div>
+
+          <label for="repeatpassword" class="form-label">Repetir Contraseña</label>
+          <input type="repeatpassword" class="form-control" formControlName="repeatpassword">
+          <div *ngIf="repeatpassword?.errors &&repeatpassword?.touched">
+            <p *ngIf="repeatpassword?.hasError('required')" class="text-danger">
+              Este campo es requerido.
+            </p>
+            <p *ngIf="repeatpassword?.hasError('repeatpassword')" class="text-danger">
+              las contraseñas deben coincidir.
+            </p>
+          </div>
+
+          <div class="chk form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              He leído y acepto los términos y condiciones del contrato.
+            </label>
+          </div>
+          <div class= "card-footer d-flex justify-content-center">
+            <a href="#" class="btn btn-lg btn-block btn-primary">Registrate</a>
+            
+         </div>
+        </div>
+
+      </Form>
+    </div>
+  </div>
+
+</div>
