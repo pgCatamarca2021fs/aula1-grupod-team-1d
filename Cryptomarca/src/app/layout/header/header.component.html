@@ -1,1 +1,129 @@
-<p>header works!</p>
+<header class="bg col-12 p-0 ">
+
+    <nav class="navbar navbar-expand-lg barra-navegacion ">
+
+        <div class="container">
+
+            <div class="col-4 text-center">
+                <a class="navbar-brand text-white text-uppercase fs-2 d-none d-lg-block" href="#">Cryptomarca</a>
+            </div>
+
+            <div class="container-fluid collapse navbar-collapse col-4  justify-content-center" id="navbarNav">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item dropdown d-none d-lg-block me-5">
+                        <a class="nav-link dropdown-toggle text-white fs-5 fw-light" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Criptomonedas</a></li>
+                            <li><a class="dropdown-item" href="#">Wallet</a></li>
+                            <li><a class="dropdown-item" href="#">Exchange</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown d-none d-lg-block me-5">
+                        <a class="nav-link dropdown-toggle text-white fs-5 fw-light" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Criptomonedas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Bitcoin</a></li>
+                            <li><a class="dropdown-item" href="#">Ethereum</a></li>
+                            <li><a class="dropdown-item" href="#">Dogecoin</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown d-none d-lg-block me-5">
+                        <a class="nav-link dropdown-toggle text-white fs-5 fw-light" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cotización
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Bitcoin</a></li>
+                            <li><a class="dropdown-item" href="#">Ethereum</a></li>
+                            <li><a class="dropdown-item" href="#">Dogecoin</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!---HAMBURGUESA BOOTSTRAP-->
+
+        <div class="container-fluid fixed-top">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="lol bg-black p-4 d-lg-none d-xs-block d-sm-block">
+                    <h2 class="text-white h2">Cryptomarca</h2>
+                    <ul class="dots">
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link  text-terciary fs-5 fw-bold" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Productos
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link  text-terciary fs-5 fw-bold" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Criptomonedas
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link text-terciary fs-5 fw-bold" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Cotización
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link text-terciary fs-5 fw-bold" href="registro.component.html"
+                                routerLink="/registro" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Regístrate
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown me-5">
+                            <a class="nav-link text-terciary fs-5 fw-bold" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Iniciar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar fixed-top navbar-dark bg-transparent">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!---BOTONES INICIO DE SESIÓN-->
+
+        <div class="container-fluid d-none d-lg-block col-3">
+
+            <ul class="navbar-nav text-nowrap container-fluid d-flex ">
+                <li class="nav-item">
+                    <a href="#"
+                        class="btn3 inicio-sesion nav-link text-white border border-2 border-primary rounded-pill me-2 fw-bold">Iniciar
+                        Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/" class="btn3 regsitrate nav-link active text-white border border-2 border-primary rounded-pill me-2 fw-bold"
+                        routerLink="registro">Regístrate</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
