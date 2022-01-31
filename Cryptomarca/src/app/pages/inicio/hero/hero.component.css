@@ -1,0 +1,9 @@
+.fondo-navyhero {
+    background-image: url('https://ripio-cms-us.s3.amazonaws.com/filer_public/93/41/9341b0e6-3629-4134-b9d8-41c2391e85cf/index_hero.png'); height: 135vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+  
+.columna-cen-izq {
+    margin: 3rem 0em 0em 3rem;
+}
