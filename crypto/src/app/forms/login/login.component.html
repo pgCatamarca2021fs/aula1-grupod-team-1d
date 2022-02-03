@@ -1,0 +1,27 @@
+<!-- Login -->
+<div id="login" class="container">
+    <form method="post">
+      <h2  class="text-center">Iniciar Sesion</h2>
+      <div class="space-10"></div>      
+        <div class="row  justify-content-center">
+          <div class="col mb-3">
+              <label for="txtEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com">
+          </div>
+        </div> 
+        <div class="row  justify-content-center">
+          <div class="col mb-3">
+              <label for="txtPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col mb-3">            
+                <a class="btn btn-success px-3 py-2"  routerLink="/dashboard">Iniciar Sesion</a>
+            </div>
+            <div class="col my-3">            
+              <a class="txt-primary"  routerLink="/register">Crear Cuenta</a>
+            </div>
+        </div>
+    </form>  
+</div>

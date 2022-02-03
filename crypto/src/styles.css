@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@font-face {
+    font-family: "Montserrat";
+    src: url("assets/fonts/Montserrat-Regular.ttf");
+}
+
+*{
+    font-family: "Montserrat", sans-serif;
+	font-size: 14px;    
+}
+
+body{
+    background: #062489;
+    color:white;    
+}
+
+h1 {
+    font-size: 43px;
+    font-weight: 900;
+    line-height: 50px;
+    text-transform: capitalize;
+}
+
+h2 {
+    margin-bottom: 3%;
+    font-size: 33px;
+    font-weight: 800;
+    line-height: 50px;
+}
+
+h3 {
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 50px;
+}
+
+h4 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    line-height: 26px;
+    text-transform: capitalize;
+}
+
+article{
+    margin-top: 4%;
+}
+
+div a,
+div a:visited {
+    color:#ffd;
+    text-decoration: none;
+    font-weight: bolder;
+    padding: 10px;
+}
