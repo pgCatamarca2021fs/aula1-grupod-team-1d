@@ -1,0 +1,50 @@
+body{
+    color:black;
+}
+
+#dashboard{
+    background: white;
+    color:rgb(59, 59, 59);
+} 
+
+h3{
+    padding-left:1%;    
+}
+
+h5 {
+    font-size: 18px;
+    text-transform: capitalize;    
+}
+
+li{
+    margin-right: 3em;
+}
+
+.card-buy{
+    background: rgb(81, 139, 247);
+}
+
+.card-sell{
+    background: rgb(243, 85, 57);
+}
+
+.card-transfer{
+    background: rgb(123, 202, 33);
+}
+
+.card-buy a,.card-sell a,.card-transfer a{
+    font-weight: bolder;
+}
+
+.money{
+    font-size: 3.2em;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .row-cols-4 > * {
+        width: 100%;
+    }    
+}
+
+/* d-none oculta*/
