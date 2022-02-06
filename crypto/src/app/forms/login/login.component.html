@@ -1,27 +1,44 @@
-<!-- Login -->
 <div id="login" class="container">
-    <form method="post">
-      <h2  class="text-center">Iniciar Sesion</h2>
-      <div class="space-10"></div>      
-        <div class="row  justify-content-center">
-          <div class="col mb-3">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <h2  class="text-center">Iniciar Sesion</h2>
+    <div class="space-10"></div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 align-self-center">
+          <div class="mb-3">
               <label for="txtEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com">
+              <input type="email" class="form-control" formControlName="email" id="txtEmail" placeholder="name@example.com">
+
+              <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+                El correo <strong>es requerido</strong>
+              </div>
+    
+              <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+                El correo <strong>es inválido</strong>
+              </div>
           </div>
-        </div> 
-        <div class="row  justify-content-center">
-          <div class="col mb-3">
+
+          <div class="mb-3">
               <label for="txtPassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+              <input type="password" class="form-control mb-3" formControlName="password" id="txtPassword" placeholder="Password">
+
+              <div class="alert alert-danger mt-3" role="alert" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+                El password <strong>es requerido</strong>
+              </div>
+    
+              <div class="alert alert-danger" role="alert" *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+                El password tiene que tener al menos <strong>seis caracteres</strong>
+              </div>    
           </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col mb-3">            
-                <a class="btn btn-success px-3 py-2"  routerLink="/dashboard">Iniciar Sesion</a>
-            </div>
-            <div class="col my-3">            
-              <a class="txt-primary"  routerLink="/register">Crear Cuenta</a>
-            </div>
-        </div>
-    </form>  
+
+          <div class="d-grid d-sm-flex gap-3">
+            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success my-2">Iniciar Sesion</button>
+            <button class="btn btn-primary my-2" routerLink="/register">Crear Cuenta</button>
+          </div>
+      </div>
+
+      <div class="col-md-6 col-6 mx-auto">
+        <img class="logo-login" src="assets/img/welcome-img.png" width="90%" alt="Imagen Presentacion">
+      </div>
+    </div>        
+  </form>  
 </div>

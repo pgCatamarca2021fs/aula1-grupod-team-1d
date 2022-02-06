@@ -8,6 +8,8 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { NavUserComponent } from './nav-user/nav-user.component';
 import { SectionMoneyComponent } from './sections/section-money/section-money.component';
 import { OperationsComponent } from './sections/operations/operations.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule as FormsModuleAngular } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,14 +23,18 @@ import { OperationsComponent } from './sections/operations/operations.component'
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModuleAngular
   ],
   exports:[
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
     SectionMoneyComponent,
-    OperationsComponent
+    OperationsComponent,
+    ReactiveFormsModule,
+    FormsModuleAngular
   ]
 })
 export class FormsModule { }
