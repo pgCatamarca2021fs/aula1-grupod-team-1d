@@ -38,7 +38,7 @@
                     El correo <strong>es requerido</strong>
                 </div>
         
-                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email')?.hasError('minlength') && registerForm.get('email')?.touched">
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
                     El correo <strong>es inválido</strong>
                 </div>
             </div>
