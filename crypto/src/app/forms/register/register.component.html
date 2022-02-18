@@ -1,45 +1,83 @@
-<!-- Register -->
 <div id="register" class="container">
-    <form method="post" action="#">
-      <h2  class="text-center">Crear Cuenta/Registrarse</h2>
-        <div class="row  justify-content-center">
-            <div class="col mb-3">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <h2  class="text-center">Crear Cuenta/Registrarse</h2>
+        <div class="space-10"></div>
+        <div class="row">
+        <div class="col-md-6 col-sm-12 align-self-center">
+            <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="txtNombre" placeholder="tu nombre">
+                <input type="text" class="form-control" formControlName="nombre" id="txtNombre" placeholder="Tu nombre">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('nombre')?.hasError('required') && registerForm.get('nombre')?.touched">
+                    El nombre <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('nombre')?.hasError('minlength') && registerForm.get('nombre')?.touched">
+                    El nombre debe contener al menos <strong>tres caracteres</strong>
+                </div>
             </div>
-        </div>
-        <div class="row  justify-content-center">
-            <div class="col mb-3">
+
+            <div class="mb-3">
                 <label for="txtApellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="txtApellido" placeholder="tu Apellido">
+                <input type="text" class="form-control" formControlName="apellido" id="txtApellido" placeholder="Tu apellido">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('apellido')?.hasError('required') && registerForm.get('apellido')?.touched">
+                    El apellido <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('apellido')?.hasError('minlength') && registerForm.get('apellido')?.touched">
+                    El apellido debe contener al menos <strong>tres caracteres</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="txtEmail" class="form-label">Email</label>
+                <input type="text" class="form-control" formControlName="email" id="txtEmail" placeholder="Tu email">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+                    El correo <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+                    El correo <strong>es inválido</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="txtPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="password" id="txtPassword" placeholder="Tu password">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+                    El password <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
+                    El password debe contener al menos <strong>seis caracteres</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="txtRepitePassword" class="form-label">Repite Password</label>
+                <input type="password" class="form-control" formControlName="repitePassword" id="txtRepitePassword" placeholder="Repite tu password">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('repitePassword')?.hasError('required') && registerForm.get('repitePassword')?.touched">
+                    Repetir el password <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="errorPassword">
+                    Ambos passwords deben <strong>ser iguales</strong>
+                </div>
+            </div>
+
+            <div class="d-grid d-sm-flex gap-3">
+                <button type="submit" [disabled]="registerForm.invalid" class="btn btn-success my-2">Crear Cuenta</button>
+                <button class="btn btn-primary my-2" routerLink="/login">Iniciar Sesión</button>
             </div>
         </div>
-        <div class="row  justify-content-center">
-          <div class="col mb-3">
-              <label for="txtEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com">
-          </div>
-        </div> 
-        <div class="row  justify-content-center">
-          <div class="col mb-3">
-              <label for="txtPassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="txtPassword" placeholder="Password">
-          </div>
+
+        <div class="col-md-6 col-6 mx-auto">
+            <img class="logo-login" src="assets/img/welcome-img.png" width="90%" alt="Imagen Presentacion">
         </div>
-        <div class="row  justify-content-center">
-            <div class="col mb-3">
-                <label for="txtRPassword" class="form-label">Reingrese Password</label>
-                <input type="password" class="form-control" id="txtRPassword" placeholder="Reingrese Password">
-            </div>
-          </div>
-        <div class="row justify-content-center">
-            <div class="col mb-3">            
-                <a class="btn btn-success  px-3 py-2">Crear Cuenta</a>
-            </div>
-            <div class="col my-2">            
-                <a class="txt-primary" routerLink="/login">Iniciar Sesion</a>
-            </div>
-        </div>
-    </form>
-  
+        </div>        
+    </form>  
 </div>
