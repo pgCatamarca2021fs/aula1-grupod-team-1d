@@ -8,6 +8,8 @@ import { NavComponent } from './nav/nav.component';
 import { TeamComponent } from './team/team.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MemberComponent } from './member/member.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule as FormsModuleAngular } from '@angular/forms';
 
 
 @NgModule({
@@ -22,12 +24,16 @@ import { MemberComponent } from './member/member.component';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModuleAngular
   ],  
   exports:[
     LayoutComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    ReactiveFormsModule,
+    FormsModuleAngular
   ]
 })
 export class LayoutModule { }
