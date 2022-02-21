@@ -1,29 +1,54 @@
-<!-- Contacto -->
 <article id="contact">
+  <form [formGroup]="contactForm" (ngSubmit)="contact()">
     <h2>Contacto</h2>
     <div class="space-10"></div>
     <h3>Deja tu Mensaje</h3>
-    <div class="row  justify-content-center">
-        <div class="col-md-6 mb-3">
-            <label for="txtNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="txtNombre" placeholder="Tu Nombre">
-        </div>
-    </div>
-    <div class="row  justify-content-center">
-        <div class="col-md-6 mb-3">
-            <label for="txtEmail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com">
-        </div>
-    </div> 
-    <div class="row  justify-content-center">
-        <div class="col-md-6  mb-3">
-            <label for="txtMensaje" class="form-label">Escribe tu Mensaje</label>
-            <textarea class="form-control" id="txtMensaje" rows="3"></textarea>
-        </div>
-    </div>
     <div class="row justify-content-center">
-        <div class="col-md-6 mb-3">            
-            <a class="btn btn-success  px-3 py-2">Enviar Mensaje</a>
+      <div class="col-md-6 col-sm-12 align-self-center">
+        <div class="mb-3">
+          <label for="txtNombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" formControlName="nombre" id="txtNombre" placeholder="Tu Nombre">
+
+          <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('nombre')?.hasError('required') && contactForm.get('nombre')?.touched">
+            El nombre <strong>es requerido</strong>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('nombre')?.hasError('minlength') && contactForm.get('nombre')?.touched">
+            El nombre debe contener al menos <strong>cuatro caracteres</strong>
+          </div>
         </div>
-    </div>    
+
+        <div class="mb-3">
+          <label for="txtEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" id="txtEmail" placeholder="name@example.com">
+
+          <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('email')?.hasError('required') && contactForm.get('email')?.touched">
+            El correo <strong>es requerido</strong>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('email')?.hasError('email') && contactForm.get('email')?.touched">
+            El correo <strong>es inválido</strong>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="txtMensaje" class="form-label">Escribe tu Mensaje</label>
+          <textarea class="form-control mb-3" formControlName="mensaje" id="txtMensaje" rows="3"></textarea>
+
+          <div class="alert alert-danger mt-3" role="alert" *ngIf="contactForm.get('mensaje')?.hasError('required') && contactForm.get('mensaje')?.touched">
+            El mensaje <strong>es requerido</strong>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="contactForm.get('mensaje')?.hasError('minlength') && contactForm.get('mensaje')?.touched">
+            El mensaje tiene que tener al menos <strong>diez caracteres</strong>
+          </div>    
+        </div>
+
+        <div class="d-grid d-sm-flex gap-3">
+          <button [disabled]="contactForm.invalid" class="btn btn-primary my-2">Enviar Mensaje</button>
+        </div>
+
+      </div>      
+    </div>        
+  </form>      
 </article>
