@@ -11,9 +11,11 @@ namespace cryptoBackend.Controllers
     public class UsuariosController : ApiController
     {
         // GET: api/Usuarios
-        public IEnumerable<string> Get()
+        public IEnumerable<Usuario> Get()
         {
-            return null;
+            GestorUsuario gestor = new GestorUsuario();
+
+            return gestor.ListarUsuarios();
         }
 
         // GET: api/Usuarios/5
@@ -23,8 +25,10 @@ namespace cryptoBackend.Controllers
         }
 
         // POST: api/Usuarios
-        public void Post([FromBody] Usuario value)
+        public void Post([FromBody] Usuario nuevoUsuario)
         {
+            GestorUsuario gestor = new GestorUsuario();
+            gestor.CrearUsuario(nuevoUsuario);
         }
 
         // PUT: api/Usuarios/5
