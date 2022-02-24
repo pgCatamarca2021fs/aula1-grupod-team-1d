@@ -23,22 +23,22 @@ namespace cryptoBackend.Models
                 command.CommandText = "listarUsuarios";
                 command.CommandType = CommandType.StoredProcedure;
 
-                SqlDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Usuario usuario = new Usuario();
-                    usuario.Id = dataReader.GetSqlInt64(0);
-                    usuario.Nombre = dataReader.GetString(1);
-                    usuario.Email = dataReader.GetString(2);
-                    usuario.Contraseña = dataReader.GetString(3);
-                    usuario.Dni = dataReader.GetString(4);
-                    usuario.Fk_provincia = dataReader.GetSqlInt64(5);
-                    usuario.Fk_banco = dataReader.GetSqlInt64(6);
-                    usuario.Cbu = dataReader.GetString(7);
-                    usuario.FechaNacimiento = dataReader.GetDateTime(8);
+                SqlDataAdapter da = new SqlDataAdapter(command);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                    lista.Add(usuario);
-                }
+                lista = dt.AsEnumerable().Select(x => new Usuario
+                {
+                    Id = Int64.Parse(x["id"].ToString()),
+                    Nombre = x["nombre"].ToString(),
+                    Email = x["email"].ToString(),
+                    Contraseña = x["contraseña"].ToString(),
+                    Dni = x["dni"].ToString(),
+                    Fk_provincia = Int64.Parse(x["fk_provincia"].ToString()),
+                    Fk_banco = Int64.Parse(x["fk_banco"].ToString()),
+                    Cbu = x["cbu"].ToString(),
+                    FechaNacimiento = DateTime.Parse(x["fechaNacimiento"].ToString())
+                }).ToList<Usuario>();
             }
 
             return lista;
