@@ -14,7 +14,8 @@ CREATE PROCEDURE insertarUsuario
 	@fk_provincia bigint,
 	@fk_banco bigint,
 	@cbu varchar(20),
-	@fechaNacimiento dateTime
+	@fechaNacimiento dateTime,
+	@activo bit
 AS
 BEGIN
 	INSERT INTO [dbo].[usuarios]
@@ -25,7 +26,8 @@ BEGIN
            ,[fk_provincia]
            ,[fk_banco]
            ,[cbu]
-           ,[fechaNacimiento])
+           ,[fechaNacimiento],
+	   ,[activo])
      VALUES
            (
 			   @nombre,
@@ -35,7 +37,8 @@ BEGIN
 			   @fk_provincia,
 			   @fk_banco,
 			   @cbu,
-			   @fechaNacimiento
+			   @fechaNacimiento,
+			   @activo
            )
 END
 GO
