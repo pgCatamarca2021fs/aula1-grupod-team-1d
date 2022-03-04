@@ -32,7 +32,7 @@ namespace cryptoBackend.Models
                     Id = Int64.Parse(x["id"].ToString()),
                     Nombre = x["nombre"].ToString(),
                     Email = x["email"].ToString(),
-                    Contraseña = x["contraseña"].ToString(),
+                    Password = x["password"].ToString(),
                     Dni = x["dni"].ToString(),
                     Fk_provincia = Int64.Parse(x["fk_provincia"].ToString()),
                     Fk_banco = Int64.Parse(x["fk_banco"].ToString()),
@@ -55,7 +55,7 @@ namespace cryptoBackend.Models
 
                 command.Parameters.Add(new SqlParameter("@nombre", usuario.Nombre));
                 command.Parameters.Add(new SqlParameter("@email", usuario.Email));
-                command.Parameters.Add(new SqlParameter("@contraseña", usuario.Contraseña));
+                command.Parameters.Add(new SqlParameter("@contraseña", usuario.Password));
                 command.Parameters.Add(new SqlParameter("@dni", usuario.Dni));
                 command.Parameters.Add(new SqlParameter("@fk_provincia", usuario.Fk_provincia));
                 command.Parameters.Add(new SqlParameter("@fk_banco", usuario.Fk_banco));

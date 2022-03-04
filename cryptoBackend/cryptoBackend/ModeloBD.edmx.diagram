@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef7d8b923a664894ab634e0a998088e8" Name="Diagram1">
+        <EntityTypeShape EntityType="cryptomarcaModel.bancos" Width="1.5" PointX="1.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cryptomarcaModel.billeterasMonedas" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="cryptomarcaModel.monedas" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="cryptomarcaModel.movimientos" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="cryptomarcaModel.paises" Width="1.5" PointX="1.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cryptomarcaModel.provincias" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="cryptomarcaModel.tipoMovimientos" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="cryptomarcaModel.FK_billeterasMonedas_monedas" ManuallyRouted="false" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMonedas" ManuallyRouted="false" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_monedas" ManuallyRouted="false" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_monedas1" ManuallyRouted="false" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_tipoMovimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="cryptomarcaModel.FK_provincias_paises" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="cryptomarcaModel.usuarios" Width="1.5" PointX="0.5" PointY="8.25" />
+        <AssociationConnector Association="cryptomarcaModel.FK_usuarios_bancos" />
+        <AssociationConnector Association="cryptomarcaModel.FK_billeterasMonedas_usuarios" />
+        <AssociationConnector Association="cryptomarcaModel.FK_usuarios_provincias" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
