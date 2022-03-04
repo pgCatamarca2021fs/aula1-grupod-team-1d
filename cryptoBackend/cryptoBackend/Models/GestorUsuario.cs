@@ -10,7 +10,7 @@ namespace cryptoBackend.Models
 {
     public class GestorUsuario
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["CriptomarcaDB"].ToString();
+        string connectionString = ConfigurationManager.ConnectionStrings["cryptomarcaEntities"].ToString();
 
         public List<Usuario> ListarUsuarios()
         {
@@ -37,7 +37,9 @@ namespace cryptoBackend.Models
                     Fk_provincia = Int64.Parse(x["fk_provincia"].ToString()),
                     Fk_banco = Int64.Parse(x["fk_banco"].ToString()),
                     Cbu = x["cbu"].ToString(),
-                    FechaNacimiento = DateTime.Parse(x["fechaNacimiento"].ToString())
+                    FechaNacimiento = DateTime.Parse(x["fechaNacimiento"].ToString()),
+                    Activo = bool.Parse(x["activo"].ToString())
+
                 }).ToList<Usuario>();
             }
 
@@ -55,12 +57,13 @@ namespace cryptoBackend.Models
 
                 command.Parameters.Add(new SqlParameter("@nombre", usuario.Nombre));
                 command.Parameters.Add(new SqlParameter("@email", usuario.Email));
-                command.Parameters.Add(new SqlParameter("@contraseña", usuario.Password));
+                command.Parameters.Add(new SqlParameter("@password", usuario.Password));
                 command.Parameters.Add(new SqlParameter("@dni", usuario.Dni));
                 command.Parameters.Add(new SqlParameter("@fk_provincia", usuario.Fk_provincia));
                 command.Parameters.Add(new SqlParameter("@fk_banco", usuario.Fk_banco));
                 command.Parameters.Add(new SqlParameter("@cbu", usuario.Cbu));
                 command.Parameters.Add(new SqlParameter("@fechaNacimiento", usuario.FechaNacimiento));
+                command.Parameters.Add(new SqlParameter("@activo", usuario.Activo));
 
                 command.ExecuteNonQuery();
             }
