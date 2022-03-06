@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovementTypeService } from 'src/app/services/movement-type.service';
 import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
@@ -8,13 +9,16 @@ import { WalletService } from 'src/app/services/wallet.service';
 })
 export class DashboardComponent implements OnInit {
  
-  wallet:{name:string,price:number}[]  
+  wallet:any; 
+ movementTypes:any;
 
-  constructor(wallet:WalletService) {
-    this.wallet=wallet.get()
-   }
+  constructor(private walletServ:WalletService,private typeServ:MovementTypeService) {  }
 
   ngOnInit(): void {
+    this.wallet=this.walletServ.get();
+    this.typeServ.list().subscribe(data=>{
+      this.movementTypes=data;
+    });
   }
 
 }

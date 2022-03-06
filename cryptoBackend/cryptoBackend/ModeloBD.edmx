@@ -307,7 +307,6 @@
           </Key>
           <Property Name="id" Type="Decimal" Precision="2" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="movimientos" Relationship="Self.FK_movimientos_tipoMovimientos" FromRole="tipoMovimientos" ToRole="movimientos" />
         </EntityType>
         <Association Name="FK_billeterasMonedas_monedas">
           <End Role="monedas" Type="Self.monedas" Multiplicity="1" />

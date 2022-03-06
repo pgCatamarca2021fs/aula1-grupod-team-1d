@@ -299,3 +299,6 @@ D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\obj\Debug\cryp
 D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\obj\Debug\cryptoBackend.csproj.CopyComplete
 D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\obj\Debug\cryptoBackend.dll
 D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\obj\Debug\cryptoBackend.pdb
+D:\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Cors.dll
+D:\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.dll
+D:\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.xml
