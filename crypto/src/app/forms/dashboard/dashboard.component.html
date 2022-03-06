@@ -23,47 +23,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="card card-buy text-white mb-3">
-          <h5 class="card-header"><i class="bi bi-cart-plus"></i> &nbsp;Comprar / <i class="bi bi-cart-dash"></i>Vender</h5>
-          <div class="card-body">
-            <form>
-                <div class="row justify-content-center">
-                  <div class="col mb-3">
-                      <label for="drMoney" class="form-label">Moneda</label>
-                      <select class="form-control" id="drMoney">
-                        <option selected>Seleccione</option>
-                      </select>
-                  </div>
-                  <div class="col mb-3 text-center">
-                    <p class="money">$0</p>
-                  </div>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="col mb-3">
-                    <label for="drMovementType" class="form-label">Tipo</label>
-                    <select class="form-control" id="drMovementType">
-                      <option *ngFor="let item of movementTypes" value="{{item.id}}">{{item.descripcion}}</option>
-                    </select>
-                  </div>
-                  <div class="col mb-3 text-center">
-                    
-                  </div>
-                </div> 
-                <div class="row justify-content-center">
-                  <div class="col mb-3">
-                      <label for="txtnumber" class="form-label">Cantidad</label>
-                      <input id="txtnumber" class="form-control" placeholder="cantidad" type="number" step="0.00001">
-                  </div>
-                  <div class="col"></div>
-                </div>
-                <div class="row">
-                    <div class="col mb-3 text-center">            
-                        <a class="btn btn-primary px-4 py-3"  routerLink="/dashboard">Comprar</a>
-                    </div>                    
-                </div>
-            </form> 
-          </div>
-        </div>
+        <app-operation-panel></app-operation-panel>
       </div>      
       <div class="col-md-4">
         <div class="card card-transfer text-white mb-3">
