@@ -26,3 +26,8 @@
 .card-header b{
     text-transform:capitalize;
 }
+
+.compra a,.venta a, .transferencia a{
+    border:solid #fff;
+    color:#fff;
+}
