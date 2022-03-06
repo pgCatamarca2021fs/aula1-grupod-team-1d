@@ -4,38 +4,38 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace cryptoBackend.Controllers
 {
-    public class BancoController : ApiController
+    [EnableCors(origins: "*", headers:"*", methods:"*")]
+    public class TipoMovimientoController : ApiController
     {
         cryptomarcaEntities db = new cryptomarcaEntities();
-
-        // GET: api/Banco
+        // GET: api/TipoMovimiento
         public IHttpActionResult Get()
         {
             try
             {
-                List<bancos> lbancos = db.bancos.ToList();
-                return Ok(lbancos);
+                List<tipoMovimientos> ltipoMovimientos = db.tipoMovimientos.ToList();
+                return Ok(ltipoMovimientos);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return NotFound();
             }
-            
         }
 
-        // GET: api/Banco/5
+        // GET: api/TipoMovimiento/5
         public IHttpActionResult Get(Int64 id)
         {
             if (id <= 0) return NotFound();
 
             try
             {
-                bancos banco = db.bancos.Where(x=> x.id==id).FirstOrDefault<bancos>();
-                if (banco == null) return Ok();
-                return Ok(banco);
+                tipoMovimientos tipoMovimientos = db.tipoMovimientos.Where(x => x.id == id).FirstOrDefault<tipoMovimientos>();
+                if (tipoMovimientos == null) return Ok();
+                return Ok(tipoMovimientos);
             }
             catch (Exception e)
             {

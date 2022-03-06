@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { FormsModule } from './forms/forms.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule 
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
