@@ -6,10 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
-using cryptoBackend.Models;
+using System.Web.Http.Cors;
 
 namespace cryptoBackend.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsuarioController : ApiController
     {
         cryptomarcaEntities db;

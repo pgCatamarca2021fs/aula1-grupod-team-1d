@@ -20,10 +20,6 @@ li{
     margin-right: 3em;
 }
 
-.card-buy{
-    background: rgb(81, 139, 247);
-}
-
 .card-sell{
     background: rgb(243, 85, 57);
 }
@@ -32,7 +28,7 @@ li{
     background: rgb(123, 202, 33);
 }
 
-.card-buy a,.card-sell a,.card-transfer a{
+.card-sell a,.card-transfer a{
     font-weight: bolder;
 }
 

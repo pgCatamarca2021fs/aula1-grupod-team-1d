@@ -10,6 +10,7 @@ import { SectionMoneyComponent } from './sections/section-money/section-money.co
 import { OperationsComponent } from './sections/operations/operations.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule as FormsModuleAngular } from '@angular/forms';
+import { OperationPanelComponent } from './operation-panel/operation-panel.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule as FormsModuleAngular } from '@angular/forms';
     ResetpasswordComponent,
     NavUserComponent,
     SectionMoneyComponent,
-    OperationsComponent
+    OperationsComponent,
+    OperationPanelComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { FormsModule as FormsModuleAngular } from '@angular/forms';
     SectionMoneyComponent,
     OperationsComponent,
     ReactiveFormsModule,
-    FormsModuleAngular
+    FormsModuleAngular,
+    OperationPanelComponent
   ]
 })
 export class FormsModule { }

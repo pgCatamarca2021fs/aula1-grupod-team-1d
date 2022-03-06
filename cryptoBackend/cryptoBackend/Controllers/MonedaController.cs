@@ -9,32 +9,35 @@ using System.Web.Http.Cors;
 namespace cryptoBackend.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ProvinciaController : ApiController
+    public class MonedaController : ApiController
     {
         cryptomarcaEntities db = new cryptomarcaEntities();
 
-        // GET: api/Provincia
+        // GET: api/Moneda
         public IHttpActionResult Get()
         {
             try
             {
-                List<provincias> lprovincias = db.provincias.ToList();
-                return Ok(lprovincias);
+                List<monedas> lMonedas = db.monedas.ToList();
+                return Ok(lMonedas);
             }
             catch (Exception e)
             {
                 return NotFound();
             }
+
         }
 
-        // GET: api/Provincia/5
+        // GET: api/Moneda/5
         public IHttpActionResult Get(Int64 id)
         {
+            if (id <= 0) return NotFound();
+
             try
             {
-                provincias provincia = db.provincias.Where(x => x.id == id).FirstOrDefault<provincias>();
-                if (provincia == null) return Ok();
-                return Ok(provincia);
+                monedas moneda = db.monedas.Where(x => x.id == id).FirstOrDefault<monedas>();
+                if (moneda == null) return Ok();
+                return Ok(moneda);
             }
             catch (Exception e)
             {

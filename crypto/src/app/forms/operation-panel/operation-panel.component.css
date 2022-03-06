@@ -1,0 +1,28 @@
+.card-buy{
+    background: rgb(81, 139, 247);
+}
+
+.card-buy a{
+    font-weight: bolder;
+}
+
+.money{
+    font-size: 3.2em;
+    font-weight: bold;
+}
+
+.compra{
+    background:rgb(81, 139, 247);
+}
+
+.venta{
+    background:rgb(218, 62, 114);
+}
+
+.transferencia{
+    background:rgb(123, 202, 33);
+}
+
+.card-header b{
+    text-transform:capitalize;
+}
