@@ -30,6 +30,14 @@
               </div>    
           </div>
 
+          <div class="mb-3">
+              <div class="alert alert-danger" role="alert" *ngIf="errorSession">
+                  Ocurrió un error con tu usuario y/o password, vuelve a intentarlo
+              </div>    
+          </div>
+
+
+
           <div class="d-grid d-sm-flex gap-3">
             <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success my-2">Iniciar Sesion</button>
             <button class="btn btn-primary my-2" routerLink="/register">Crear Cuenta</button>

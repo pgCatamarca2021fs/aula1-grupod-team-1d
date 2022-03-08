@@ -14,7 +14,16 @@ namespace cryptoBackend
     
     public partial class paises
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public paises()
+        {
+            this.provincias = new HashSet<provincias>();
+        }
+    
         public long id { get; set; }
         public string nombre { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<provincias> provincias { get; set; }
     }
 }

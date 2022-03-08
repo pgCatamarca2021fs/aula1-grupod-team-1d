@@ -14,7 +14,16 @@ namespace cryptoBackend
     
     public partial class tipoMovimientos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tipoMovimientos()
+        {
+            this.movimientos = new HashSet<movimientos>();
+        }
+    
         public decimal id { get; set; }
         public string descripcion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<movimientos> movimientos { get; set; }
     }
 }
