@@ -14,6 +14,12 @@ namespace cryptoBackend
     
     public partial class usuarios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public usuarios()
+        {
+            this.billeterasMonedas = new HashSet<billeterasMonedas>();
+        }
+    
         public long id { get; set; }
         public string nombre { get; set; }
         public string email { get; set; }
@@ -24,5 +30,10 @@ namespace cryptoBackend
         public string cbu { get; set; }
         public System.DateTime fechaNacimiento { get; set; }
         public bool activo { get; set; }
+    
+        public virtual bancos bancos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<billeterasMonedas> billeterasMonedas { get; set; }
+        public virtual provincias provincias { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorSession: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private loginService:LoginService, private cookie: CookieService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -24,11 +27,21 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    console.log('Pasó la validación');
-    console.log('email: ', email);
-    console.log('password: ', password);
-
-    this.router.navigate(['/dashboard']);
-  }
-  
+    this.loginService.login(email, password)
+      .subscribe({
+        next: (responseOK) => {         
+          console.log(responseOK);         
+          this.cookie.set('token', responseOK, 4, '/');
+          this.router.navigate(['/dashboard']);
+          console.log('Sesion iniciada correcta');         
+       },
+       error: (responseFail) => {         
+          console.log('Ocurrio error con tu email o password');  
+          this.errorSession = true;       
+          setTimeout(()=>{
+            this.errorSession = false;
+          },2000);          
+       }      
+     });
+  }  
 }
