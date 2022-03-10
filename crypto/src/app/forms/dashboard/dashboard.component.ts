@@ -8,13 +8,12 @@ import { WalletService } from 'src/app/services/wallet.service';
 })
 export class DashboardComponent implements OnInit {
  
-  wallet:{name:string,price:number}[]  
-
-  constructor(wallet:WalletService) {
-    this.wallet=wallet.get()
-   }
+  wallet:any; 
+  
+  constructor(private walletServ:WalletService) {  }
 
   ngOnInit(): void {
+    this.wallet=this.walletServ.get();
   }
 
 }

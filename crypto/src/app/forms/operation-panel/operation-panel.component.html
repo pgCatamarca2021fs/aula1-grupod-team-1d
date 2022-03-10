@@ -1,0 +1,41 @@
+<div class="card card-buy text-white mb-3" [ngClass]="classSelect">
+    <h5 class="card-header">
+        <i class="bi bi-cash-coin"></i> &nbsp; <b>{{classSelect}}</b>
+    </h5>
+    <div class="card-body">
+      <form [formGroup]="form">
+          <div class="row justify-content-center">
+            <div class="col mb-3">
+                <label for="drMoney" class="form-label">Moneda</label>
+                <select class="form-control" id="drMoney" formControlName="money">
+                    <option *ngFor="let item of listMoney" value="{{item.id}}">{{item.nombre}}</option>
+                </select>
+            </div>
+            <div class="col mb-3 text-center">
+              <p class="money">$0</p>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col mb-3">
+              <label for="drMovementType" class="form-label">Tipo</label>
+              <select class="form-control" id="drMovementType" formControlName="movementType" (change)="onChangeColor()">
+                <option *ngFor="let item of listMovementTypes" value="{{item.id}}">{{item.descripcion}}</option>
+              </select>
+            </div>
+            <div class="col mb-3 text-center"></div>
+          </div> 
+          <div class="row justify-content-center">
+            <div class="col mb-3">
+                <label for="txtnumber" class="form-label" formControlName="quantity">Cantidad</label>
+                <input id="txtnumber" class="form-control" placeholder="cantidad" type="number" step="0.00001">
+            </div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+              <div class="col mb-3 text-center">            
+                  <a class="btn btn-primary px-4 py-3"  routerLink="/dashboard" [ngClass]="classSelect">Realizar</a>
+              </div>                    
+          </div>
+      </form> 
+    </div>
+  </div>

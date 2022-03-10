@@ -14,6 +14,6 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT [id],[nombre],[email],[contraseña],[dni],[fk_provincia],[fk_banco],[cbu],[fechaNacimiento] FROM [dbo].[usuarios]
+	SELECT [id],[nombre],[email],[password],[dni],[fk_provincia],[fk_banco],[cbu],[fechaNacimiento],[activo] FROM [dbo].[usuarios]
 END
 GO
