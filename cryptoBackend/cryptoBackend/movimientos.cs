@@ -21,10 +21,5 @@ namespace cryptoBackend
         public decimal fk_tipoMovimiento { get; set; }
         public Nullable<long> fk_monedaOrigen { get; set; }
         public Nullable<long> fk_monedaDestino { get; set; }
-    
-        public virtual billeterasMonedas billeterasMonedas { get; set; }
-        public virtual monedas monedas { get; set; }
-        public virtual monedas monedas1 { get; set; }
-        public virtual tipoMovimientos tipoMovimientos { get; set; }
     }
 }

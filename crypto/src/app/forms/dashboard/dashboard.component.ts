@@ -7,13 +7,14 @@ import { WalletService } from 'src/app/services/wallet.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
- 
+  idUsuario:number=2; //hacerlo dinamico
   wallet:any; 
   
   constructor(private walletServ:WalletService) {  }
 
   ngOnInit(): void {
-    this.wallet=this.walletServ.get();
+    this.wallet=this.walletServ.get(this.idUsuario);
+    console.log(this.wallet);
   }
 
 }

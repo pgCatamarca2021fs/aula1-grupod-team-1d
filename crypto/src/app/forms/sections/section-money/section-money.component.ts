@@ -7,9 +7,10 @@ import { Component, Input, OnInit  } from '@angular/core';
 })
 export class SectionMoneyComponent implements OnInit {
   
-  @Input() money={name:"",price:0}
+  @Input() money={precio:0,moneda:"",idBilletera:0,idMoneda:0}
   
-  constructor() { 
+  constructor() {
+     
   }
 
   ngOnInit(): void {

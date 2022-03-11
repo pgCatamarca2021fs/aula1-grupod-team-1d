@@ -23,7 +23,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <app-operation-panel></app-operation-panel>
+        <app-operation-panel [wallet]="wallet"></app-operation-panel>
       </div>      
       <div class="col-md-4">
         <div class="card card-transfer text-white mb-3">
@@ -38,7 +38,7 @@
                     </select>
                 </div>                
                 <div class="col mb-3 text-center">
-                  <p class="money">$0</p>
+                  <p class="money" #moneyP>$0</p>
               </div>
               </div> 
               <div class="row justify-content-center">
