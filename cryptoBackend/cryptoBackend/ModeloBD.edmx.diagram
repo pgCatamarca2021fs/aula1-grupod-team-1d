@@ -16,9 +16,8 @@
         <AssociationConnector Association="cryptomarcaModel.FK_usuarios_bancos" />
         <AssociationConnector Association="cryptomarcaModel.FK_billeterasMonedas_monedas" />
         <AssociationConnector Association="cryptomarcaModel.FK_billeterasMonedas_usuarios" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMonedas" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_monedas" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_monedas1" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" />
         <AssociationConnector Association="cryptomarcaModel.FK_movimientos_tipoMovimientos" />
         <AssociationConnector Association="cryptomarcaModel.FK_provincias_paises" />
         <AssociationConnector Association="cryptomarcaModel.FK_usuarios_provincias" />

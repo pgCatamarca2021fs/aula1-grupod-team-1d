@@ -212,7 +212,6 @@
     </Compile>
     <Compile Include="Models\Banco.cs" />
     <Compile Include="Models\FuncionesComunes.cs" />
-    <Compile Include="Models\GestorMovimiento.cs" />
     <Compile Include="Models\GestorUsuario.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Movimiento.cs" />

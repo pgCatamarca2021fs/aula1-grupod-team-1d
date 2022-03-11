@@ -4,42 +4,45 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using cryptoBackend.Models;
-
+using System.Web.Http.Cors;
 
 namespace cryptoBackend.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MovimientoController : ApiController
     {
-        // GET: api/Movimiento
-        public IEnumerable<Movimiento> Get()
-        {
-            GestorMovimiento gestor = new GestorMovimiento();
+        cryptomarcaEntities db = new cryptomarcaEntities();
 
-            return gestor.ListarMovimientosDeUsuario(2);
+        // GET: api/Movimiento
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                List<movimientos> lmovimientos = db.movimientos.ToList();
+                return Ok(lmovimientos);
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+
         }
 
         // GET: api/Movimiento/5
-        public string Get(int id)
+        public IHttpActionResult Get(Int64 id)
         {
-            return "value";
-        }
+            if (id <= 0) return NotFound();
 
-        // POST: api/Movimiento
-        public void Post([FromBody] Movimiento nuevoMovimiento)
-        {
-            GestorMovimiento gestor = new GestorMovimiento();
-            gestor.CrearMovimiento(nuevoMovimiento);
-        }
-
-        // PUT: api/Movimiento/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Movimiento/5
-        public void Delete(int id)
-        {
+            try
+            {
+                movimientos movimiento = db.movimientos.Where(x => x.id == id).FirstOrDefault<movimientos>();
+                if (movimiento == null) return Ok();
+                return Ok(movimiento);
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
         }
     }
 }

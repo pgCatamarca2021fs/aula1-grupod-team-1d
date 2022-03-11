@@ -36,12 +36,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fk_billeteraMoneda" Type="bigint" Nullable="false" />
-          <Property Name="cantidad" Type="decimal" Precision="22" Scale="6" Nullable="false" />
+          <Property Name="fk_billeteraMoneda_Origen" Type="bigint" Nullable="true" />
+          <Property Name="fk_billeteraMoneda_Destino" Type="bigint" Nullable="false" />
+          <Property Name="cantidad_Origen" Type="decimal" Precision="22" Scale="6" Nullable="true" />
+          <Property Name="cantidad_Destino" Type="decimal" Precision="22" Scale="6" Nullable="false" />
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="fk_tipoMovimiento" Type="numeric" Precision="2" Scale="0" Nullable="false" />
-          <Property Name="fk_monedaOrigen" Type="bigint" />
-          <Property Name="fk_monedaDestino" Type="bigint" />
         </EntityType>
         <EntityType Name="paises">
           <Key>
@@ -104,7 +104,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_movimientos_billeterasMonedas">
+        <Association Name="FK_movimientos_billeterasMoneda_Origen">
           <End Role="billeterasMonedas" Type="Self.billeterasMonedas" Multiplicity="1" />
           <End Role="movimientos" Type="Self.movimientos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,31 +112,19 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="movimientos">
-              <PropertyRef Name="fk_billeteraMoneda" />
+              <PropertyRef Name="fk_billeteraMoneda_Origen" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_movimientos_monedas">
-          <End Role="monedas" Type="Self.monedas" Multiplicity="0..1" />
+        <Association Name="FK_movimientos_billeterasMoneda_Destino">
+          <End Role="billeterasMonedas" Type="Self.billeterasMonedas" Multiplicity="1" />
           <End Role="movimientos" Type="Self.movimientos" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="monedas">
+            <Principal Role="billeterasMonedas">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="movimientos">
-              <PropertyRef Name="fk_monedaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_movimientos_monedas1">
-          <End Role="monedas" Type="Self.monedas" Multiplicity="0..1" />
-          <End Role="movimientos" Type="Self.movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="monedas">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="movimientos">
-              <PropertyRef Name="fk_monedaDestino" />
+              <PropertyRef Name="fk_billeteraMoneda_Destino" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -205,16 +193,12 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
           </AssociationSet>
-          <AssociationSet Name="FK_movimientos_billeterasMonedas" Association="Self.FK_movimientos_billeterasMonedas">
+          <AssociationSet Name="FK_movimientos_billeterasMoneda_Origen" Association="Self.FK_movimientos_billeterasMoneda_Origen">
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
             <End Role="movimientos" EntitySet="movimientos" />
           </AssociationSet>
-          <AssociationSet Name="FK_movimientos_monedas" Association="Self.FK_movimientos_monedas">
-            <End Role="monedas" EntitySet="monedas" />
-            <End Role="movimientos" EntitySet="movimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_movimientos_monedas1" Association="Self.FK_movimientos_monedas1">
-            <End Role="monedas" EntitySet="monedas" />
+          <AssociationSet Name="FK_movimientos_billeterasMoneda_Destino" Association="Self.FK_movimientos_billeterasMoneda_Destino">
+            <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
             <End Role="movimientos" EntitySet="movimientos" />
           </AssociationSet>
           <AssociationSet Name="FK_movimientos_tipoMovimientos" Association="Self.FK_movimientos_tipoMovimientos">
@@ -259,16 +243,12 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
           </AssociationSet>
-          <AssociationSet Name="FK_movimientos_billeterasMonedas" Association="cryptomarcaModel.FK_movimientos_billeterasMonedas">
+          <AssociationSet Name="FK_movimientos_billeterasMonedas" Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen">
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
             <End Role="movimientos" EntitySet="movimientos" />
           </AssociationSet>
-          <AssociationSet Name="FK_movimientos_monedas" Association="cryptomarcaModel.FK_movimientos_monedas">
-            <End Role="monedas" EntitySet="monedas" />
-            <End Role="movimientos" EntitySet="movimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_movimientos_monedas1" Association="cryptomarcaModel.FK_movimientos_monedas1">
-            <End Role="monedas" EntitySet="monedas" />
+          <AssociationSet Name="FK_movimientos_billeterasMonedas" Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino">
+            <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
             <End Role="movimientos" EntitySet="movimientos" />
           </AssociationSet>
           <AssociationSet Name="FK_movimientos_tipoMovimientos" Association="cryptomarcaModel.FK_movimientos_tipoMovimientos">
@@ -313,9 +293,8 @@
           <Property Name="cotizacion" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
           <Property Name="fecha_cotizacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="direccion_contrato" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_monedas" FromRole="monedas" ToRole="billeterasMonedas" />
-          <NavigationProperty Name="movimientos" Relationship="cryptomarcaModel.FK_movimientos_monedas" FromRole="monedas" ToRole="movimientos" />
-          <NavigationProperty Name="movimientos1" Relationship="cryptomarcaModel.FK_movimientos_monedas1" FromRole="monedas" ToRole="movimientos" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" FromRole="monedas" ToRole="billeterasMonedas" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" FromRole="monedas" ToRole="billeterasMonedas" />
         </EntityType>
         <EntityType Name="movimientos">
           <Key>
@@ -328,9 +307,8 @@
           <Property Name="fk_tipoMovimiento" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
           <Property Name="fk_monedaOrigen" Type="Int64" />
           <Property Name="fk_monedaDestino" Type="Int64" />
-          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMonedas" FromRole="movimientos" ToRole="billeterasMonedas" />
-          <NavigationProperty Name="monedas" Relationship="cryptomarcaModel.FK_movimientos_monedas" FromRole="movimientos" ToRole="monedas" />
-          <NavigationProperty Name="monedas1" Relationship="cryptomarcaModel.FK_movimientos_monedas1" FromRole="movimientos" ToRole="monedas" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" FromRole="movimientos" ToRole="billeterasMonedas" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" FromRole="movimientos" ToRole="billeterasMonedas" />
           <NavigationProperty Name="tipoMovimientos" Relationship="cryptomarcaModel.FK_movimientos_tipoMovimientos" FromRole="movimientos" ToRole="tipoMovimientos" />
         </EntityType>
         <EntityType Name="paises">
@@ -413,39 +391,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_movimientos_billeterasMonedas">
-          <End Type="cryptomarcaModel.billeterasMonedas" Role="billeterasMonedas" Multiplicity="1" />
-          <End Type="cryptomarcaModel.movimientos" Role="movimientos" Multiplicity="*" />
+        <Association Name="FK_movimientos_billeterasMoneda_Origen">
+          <End Role="billeterasMonedas" Type="Self.billeterasMonedas" Multiplicity="1" />
+          <End Role="movimientos" Type="Self.movimientos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="billeterasMonedas">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="movimientos">
-              <PropertyRef Name="fk_billeteraMoneda" />
+              <PropertyRef Name="fk_billeteraMoneda_Origen" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_movimientos_monedas">
-          <End Type="cryptomarcaModel.monedas" Role="monedas" Multiplicity="0..1" />
-          <End Type="cryptomarcaModel.movimientos" Role="movimientos" Multiplicity="*" />
+        <Association Name="FK_movimientos_billeterasMoneda_Destino">
+          <End Role="billeterasMonedas" Type="Self.billeterasMonedas" Multiplicity="1" />
+          <End Role="movimientos" Type="Self.movimientos" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="monedas">
+            <Principal Role="billeterasMonedas">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="movimientos">
-              <PropertyRef Name="fk_monedaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_movimientos_monedas1">
-          <End Type="cryptomarcaModel.monedas" Role="monedas" Multiplicity="0..1" />
-          <End Type="cryptomarcaModel.movimientos" Role="movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="monedas">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="movimientos">
-              <PropertyRef Name="fk_monedaDestino" />
+              <PropertyRef Name="fk_billeteraMoneda_Destino" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
