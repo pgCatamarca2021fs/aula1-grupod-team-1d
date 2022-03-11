@@ -18,6 +18,7 @@ namespace cryptoBackend
         public cryptomarcaEntities()
             : base("name=cryptomarcaEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

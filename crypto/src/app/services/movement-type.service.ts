@@ -13,4 +13,8 @@ export class MovementTypeService {
    list():Observable<any> {
     return this.http.get(this.urlApi);
    }
+
+   getTipoOperacion(id:number):Observable<any> {
+    return this.http.get(this.urlApi+"/getTipoOperacion/"+id);
+   }
 }

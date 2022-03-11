@@ -3,18 +3,7 @@
         <i class="bi bi-cash-coin"></i> &nbsp; <b>{{classSelect}}</b>
     </h5>
     <div class="card-body">
-      <form [formGroup]="form">
-          <div class="row justify-content-center">
-            <div class="col mb-3">
-                <label for="drMoney" class="form-label">Moneda</label>
-                <select class="form-control" id="drMoney" formControlName="money">
-                    <option *ngFor="let item of listMoney" value="{{item.id}}">{{item.nombre}}</option>
-                </select>
-            </div>
-            <div class="col mb-3 text-center">
-              <p class="money">$0</p>
-            </div>
-          </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmitForm($event)" >
           <div class="row justify-content-center">
             <div class="col mb-3">
               <label for="drMovementType" class="form-label">Tipo</label>
@@ -26,16 +15,30 @@
           </div> 
           <div class="row justify-content-center">
             <div class="col mb-3">
-                <label for="txtnumber" class="form-label" formControlName="quantity">Cantidad</label>
-                <input id="txtnumber" class="form-control" placeholder="cantidad" type="number" step="0.00001">
+                <label for="drMoney" class="form-label">Moneda</label>
+                <select class="form-control" id="drMoney" formControlName="money">
+                    <option *ngFor="let item of listMoney" value="{{item.id}}">{{item.nombre}}</option>
+                </select>
+            </div>
+            <div class="col mb-3 text-center">
+              <p id="moneyP" class="money">$0</p>
+            </div>
+          </div>          
+          <div class="row justify-content-center">
+            <div class="col mb-3">
+                <label for="txtnumber" class="form-label" >Cantidad</label>
+                <input id="txtnumber" class="form-control" formControlName="quantity" type="number" step="0.00001" value="" placeholder="0.00">
             </div>
             <div class="col"></div>
           </div>
           <div class="row">
               <div class="col mb-3 text-center">            
-                  <a class="btn btn-primary px-4 py-3"  routerLink="/dashboard" [ngClass]="classSelect">Realizar</a>
+                  <button type="submit" class="btn btn-primary px-4 py-3"  routerLink="/dashboard" [ngClass]="classSelect" >Realizar</button>
               </div>                    
           </div>
-      </form> 
+      </form>
+      <div class="alert alert-danger" role="alert" *ngIf="mjeError">
+        {{mje}}
+      </div> 
     </div>
   </div>
