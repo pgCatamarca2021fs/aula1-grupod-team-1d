@@ -12,19 +12,13 @@ export class WalletService {
   private wallet:{precio:number,moneda:string, idBilletera:number, idMoneda:number}[]
   
   constructor(private http:HttpClient) { 
-    this.wallet=[{moneda:"pesos",precio:1501, idBilletera:56, idMoneda:1}]
+    this.wallet=[];
   }
 
   get(idUsuario:number){
-    return this.wallet;
+    return this.http.get(this.urlApi+idUsuario);
   }
-
-  /*get(idUsuario:number):Observable<any> {
-    //return this.http.get(this.urlApi); //+"/"+idUsuario
-  }*/
-
   
-
   post(opera:Operation):Observable<any>{
     return this.http.post(this.urlApi,opera)
   }

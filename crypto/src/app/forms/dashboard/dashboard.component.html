@@ -23,7 +23,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <app-operation-panel [wallet]="wallet"></app-operation-panel>
+        <app-operation-panel [wallet]="wallet" (walletResponse)="walletAll($event)"></app-operation-panel>
       </div>      
       <div class="col-md-4">
         <div class="card card-transfer text-white mb-3">

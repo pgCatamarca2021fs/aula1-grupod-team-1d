@@ -10,11 +10,16 @@ export class DashboardComponent implements OnInit {
   idUsuario:number=2; //hacerlo dinamico
   wallet:any; 
   
-  constructor(private walletServ:WalletService) {  }
+  constructor(private walletServ:WalletService) {this.wallet=[];  }
 
   ngOnInit(): void {
-    this.wallet=this.walletServ.get(this.idUsuario);
-    console.log(this.wallet);
+    this.walletServ.get(this.idUsuario).subscribe(data=>{ console.log(data); this.wallet=data; });
+    console.log("aaa",this.wallet);    
   }
+
+  walletAll(walletResponse:boolean) {
+    console.log(walletResponse);
+    this.walletServ.get(this.idUsuario).subscribe(data=>{ console.log("obtenido",data); this.wallet=data; });
+   }
 
 }
