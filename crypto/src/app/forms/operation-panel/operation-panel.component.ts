@@ -1,5 +1,5 @@
 import { IfStmt, JitEvaluator } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl,Validators } from '@angular/forms';
 import { Operation } from 'src/app/classs/Operation';
 import { MoneyService } from 'src/app/services/money.service';
@@ -13,6 +13,8 @@ import { WalletService } from 'src/app/services/wallet.service';
 })
 export class OperationPanelComponent implements OnInit {
   @Input() wallet:any;
+  @Output () walletResponse: EventEmitter<boolean> = new EventEmitter();
+
   idUsuario:number=2;//usuario dinamico
   opera:Operation=new Operation();
   operaDestino:Operation= new Operation();
@@ -58,7 +60,7 @@ export class OperationPanelComponent implements OnInit {
     },2000);  
   }
 
-  findMoney(elem:string):any { 
+  findMoney(elem:string):any {
     return this.wallet.filter((x:any) => x.moneda.toLowerCase() == elem.toLowerCase())[0];
   };
 
@@ -68,6 +70,8 @@ export class OperationPanelComponent implements OnInit {
 
   onOperation(event:Event,money:string, idMoney:number, movementType:number,quantity:number){
     let moneySelected=this.findMoney(money); 
+    console.log(moneySelected)
+    
     let moneyPesos=this.findMoney("pesos");
     //console.log(moneyPesos);
     this.opera=new Operation();
@@ -138,8 +142,11 @@ export class OperationPanelComponent implements OnInit {
           this.wallet=this.findMoneyExclude("pesos");  
           this.wallet.push(moneyPesos); 
         }
-
-        this.wallet=this.walletServ.get(this.idUsuario); 
+        
+        this.walletServ.get(this.idUsuario).subscribe((data:any)=>{
+          this.wallet=data; 
+          console.log(data);
+        });
         //console.log("wallet",this.wallet);
 
         if(Number(this.operaDestino.tipoMovimiento)>0){
@@ -147,7 +154,8 @@ export class OperationPanelComponent implements OnInit {
             // alert("ok");
           });
         }
-      
+        
+        this.walletResponse.emit(true);
     });   
     
   }
