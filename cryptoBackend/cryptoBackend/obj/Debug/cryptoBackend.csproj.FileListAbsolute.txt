@@ -305,3 +305,14 @@ D:\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.xml
 D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Cors.dll
 D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.dll
 D:\mis_proyectos\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.xml
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\EntityFramework.dll
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\EntityFramework.SqlServer.dll
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Cors.dll
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.dll
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\EntityFramework.xml
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\EntityFramework.SqlServer.xml
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
+E:\NUEVA PC\Ruta aprendizaje WEB JS\curso ispc\repo\aula1-grupod-team-1d\cryptoBackend\cryptoBackend\bin\System.Web.Http.Cors.xml

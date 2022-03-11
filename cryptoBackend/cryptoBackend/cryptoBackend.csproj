@@ -185,6 +185,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
+    <Compile Include="Controllers\MovimientoController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
@@ -211,8 +212,10 @@
     </Compile>
     <Compile Include="Models\Banco.cs" />
     <Compile Include="Models\FuncionesComunes.cs" />
+    <Compile Include="Models\GestorMovimiento.cs" />
     <Compile Include="Models\GestorUsuario.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Movimiento.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="monedas.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>
@@ -305,6 +308,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Banco\" />
+    <Folder Include="Views\Movimiento\" />
     <Folder Include="Views\Persona\" />
   </ItemGroup>
   <ItemGroup>
