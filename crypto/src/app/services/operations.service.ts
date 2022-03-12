@@ -21,4 +21,8 @@ export class OperationsService {
   public get(idUsuario:number): Observable<Operation[]> {
     return this.http.get<Operation[]>(this.urlApi+idUsuario);
   } 
+
+  post(opera:Operation):Observable<any>{
+    return this.http.post(this.urlApi,opera)
+  }
 }
