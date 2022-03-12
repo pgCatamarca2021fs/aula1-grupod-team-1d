@@ -1,4 +1,4 @@
-﻿using cryptoBackend.Models;
+using cryptoBackend.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -18,7 +18,7 @@ namespace cryptoBackend.Controllers
         // GET: api/Movimiento
         public IHttpActionResult Get()
         {
-            try
+            /*try
             {
                 List<movimientos> lmovimientos = db.movimientos.ToList();
                 return Ok(lmovimientos);
@@ -26,7 +26,8 @@ namespace cryptoBackend.Controllers
             catch (Exception e)
             {
                 return NotFound();
-            }
+            }*/
+            return NotFound();
         }
 
         // GET: api/Movimiento/5
