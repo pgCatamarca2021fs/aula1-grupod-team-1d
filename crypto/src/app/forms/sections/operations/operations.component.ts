@@ -17,7 +17,12 @@ interface Operation {
 }
 
 interface Wallet
-{precio:number,moneda:string, idBilletera:number, idMoneda:number}
+{
+  precio:number,
+  moneda:string, 
+  idBilletera:number, 
+  idMoneda:number
+}
 
 interface Money
 {
@@ -26,6 +31,12 @@ interface Money
   cotizacion:number;
   fecha_cotizacion:string;
   direccion_contrato:string;
+}
+
+interface MovementType
+{
+  id:number;
+  descripcion:string;
 }
 
 @Component({
@@ -49,38 +60,39 @@ export class OperationsComponent implements OnInit {
     this.coins=[];
   }
 
-  getMovementType(id:number){
-    console.log(id)
-    
-    return id;
-      
-    
-  }
+  
 
   ngOnInit(): void {
     this.typeServ.list().subscribe(data=>{ 
-      //console.log("movementTypes",data); 
+      // console.log("movementTypes",data); 
       this.movementTypes=data; 
     });  
 
     this.walletServ.get(this.idUsuario).subscribe(data=>{ 
-      console.log("wallets",data); 
+      // console.log("wallets",data); 
       this.wallets=data; 
     });
 
     this.moneyServ.list().subscribe(data=>{ 
-      console.log("coins",data); 
+      // console.log("coins",data); 
       this.coins=data; 
     });
 
     this.operationsServ.get(this.idUsuario).subscribe(data=>{ 
       //console.log("operations",data); 
-      this.getMovementType(1);
+      
       this.operations=data; 
 
       this.operationsReadable=this.operations.map((operation: Operation) => {
         let billetera_Origen = this.wallets.find((wallet: Wallet) => wallet.idBilletera == operation.fk_billeteraMoneda_Origen);
         let billetera_Destino = this.wallets.find((wallet: Wallet) => wallet.idBilletera == operation.fk_billeteraMoneda_Destino);
+
+        let date = new Date(operation.fecha);
+        let ye = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(date);
+        let mo = new Intl.DateTimeFormat('es', { month: 'numeric' }).format(date);
+        let da = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
+        let fecha = `${da}/${mo}/${ye}`;
+
         return {
           id: operation.id, 
           fk_billeteraMoneda_Origen: operation.fk_billeteraMoneda_Origen,
@@ -91,8 +103,8 @@ export class OperationsComponent implements OnInit {
           moneda_Origen: this.coins.find((coin: Money) => coin.id == billetera_Origen.idMoneda), 
           cantidad_Destino: operation.cantidad_Destino,
           moneda_Destino: this.coins.find((coin: Money) => coin.id == billetera_Destino.idMoneda), 
-          fecha: operation.fecha, 
-          tipoMovimiento: this.movementTypes[operation.fk_tipoMovimiento - 1].descripcion, 
+          fecha: fecha, 
+          tipoMovimiento: this.movementTypes.find((movementType: MovementType) => movementType.id == operation.fk_tipoMovimiento).descripcion, 
         };
       });
 
