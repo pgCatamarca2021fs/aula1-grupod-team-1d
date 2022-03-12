@@ -1,4 +1,4 @@
-using cryptoBackend.Models;
+﻿using cryptoBackend.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -50,18 +50,41 @@ namespace cryptoBackend.Controllers
         }
 
         // POST: api/Movimiento
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody] movimientos movimiento)
         {
-        }
+            if (movimiento.id <= 0) return NotFound();
+            if ((movimiento.fk_billeteraMoneda_Origen <= 0) && (movimiento.fk_billeteraMoneda_Origen != null)) return NotFound();
+            if (movimiento.fk_billeteraMoneda_Destino <= 0) return NotFound();
+            if ((movimiento.cantidad_Origen <= 0) && (movimiento.cantidad_Origen != null)) return NotFound();
+            if (movimiento.cantidad_Destino <= 0) return NotFound();
+            if (movimiento.fk_tipoMovimiento <= 0) return NotFound();
 
-        // PUT: api/Movimiento/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+            try
+            {
+                using (db = new cryptomarcaEntities())
+                {
+                    movimientos newMovimiento = new movimientos()
+                    {
+                        id = movimiento.id,
+                        fk_billeteraMoneda_Origen = movimiento.fk_billeteraMoneda_Origen,
+                        fk_billeteraMoneda_Destino = movimiento.fk_billeteraMoneda_Destino,
+                        cantidad_Origen = movimiento.cantidad_Origen,
+                        cantidad_Destino = movimiento.cantidad_Destino,
+                        fecha = movimiento.fecha,
+                        fk_tipoMovimiento = movimiento.fk_tipoMovimiento
+                    };
 
-        // DELETE: api/Movimiento/5
-        public void Delete(int id)
-        {
+
+                    db.movimientos.Add(newMovimiento);
+                    db.SaveChanges();
+
+                    return Created("Creado", newMovimiento);
+                }
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
         }
     }
 }
