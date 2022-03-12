@@ -2,23 +2,21 @@
     <thead>
       <tr>
         <th scope="col">Fecha</th>
-        <th scope="col">Billetera Origen</th>
-        <th scope="col">Billetera Destino</th>
+        <th scope="col">Billetera Origen (HASH)</th>
+        <th scope="col">Billetera Destino (HASH)</th>
         <th scope="col">Cantidad Origen</th>
         <th scope="col">Cantidad Destino</th>
         <th scope="col">Tipo de Movimiento</th>
-        <th scope="col">Importe</th>
       </tr>
     </thead>
     <tbody >
-      <tr *ngFor="let operation of operations">
+      <tr *ngFor="let operation of operationsReadable">
         <td>{{operation.fecha}}</td>
         <td>{{operation.fk_billeteraMoneda_Origen}}</td>
         <td>{{operation.fk_billeteraMoneda_Destino}}</td>
-        <td>{{operation.cantidad_Origen}}</td>
-        <td>{{operation.cantidad_Origen}}</td>
-        <td>{{operation.fk_tipoMovimiento}}</td>
-        <td><i class="bi bi-coin"></i> 1</td>
+        <td>{{operation.cantidad_Origen}} <i class="bi bi-coin"></i> {{operation.moneda_Origen.nombre}}</td>
+        <td>{{operation.cantidad_Destino}} <i class="bi bi-coin"></i> {{operation.moneda_Destino.nombre}}</td>
+        <td>{{operation.tipoMovimiento}}</td>
       </tr>
     </tbody>
   </table>
