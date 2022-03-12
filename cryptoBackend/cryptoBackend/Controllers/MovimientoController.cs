@@ -11,6 +11,8 @@ using System.Web.Http.Cors;
 
 namespace cryptoBackend.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+
     public class MovimientoController : ApiController
     {
         cryptomarcaEntities db = new cryptomarcaEntities();
