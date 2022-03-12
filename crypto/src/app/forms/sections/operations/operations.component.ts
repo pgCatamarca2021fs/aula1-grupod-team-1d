@@ -60,9 +60,7 @@ export class OperationsComponent implements OnInit {
     this.coins=[];
   }
 
-  
-
-  ngOnInit(): void {
+  initializeData() {
     this.typeServ.list().subscribe(data=>{ 
       // console.log("movementTypes",data); 
       this.movementTypes=data; 
@@ -112,6 +110,10 @@ export class OperationsComponent implements OnInit {
 
       console.log("operationsReadable",this.operationsReadable); 
     }); 
+  }
+
+  ngOnInit(): void {
+    this.initializeData();
   }
 
 }
