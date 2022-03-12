@@ -18,7 +18,7 @@ export class OperationsService {
     this.operation=[];
   }
 
-  public get(idUsuario:number): Observable<Operation> {
-    return this.http.get<Operation>(this.urlApi+idUsuario);
+  public get(idUsuario:number): Observable<Operation[]> {
+    return this.http.get<Operation[]>(this.urlApi+idUsuario);
   } 
 }
