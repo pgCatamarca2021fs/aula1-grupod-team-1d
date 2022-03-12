@@ -5,6 +5,8 @@ import { Operation } from 'src/app/classs/Operation';
 import { MoneyService } from 'src/app/services/money.service';
 import { MovementTypeService } from 'src/app/services/movement-type.service';
 import { WalletService } from 'src/app/services/wallet.service';
+import { OperationsService } from 'src/app/services/operations.service';
+
 
 @Component({
   selector: 'app-operation-panel',
@@ -28,7 +30,7 @@ export class OperationPanelComponent implements OnInit {
   form:any;
   classSelect:string="compra";
 
-  constructor(private formBuilder:FormBuilder, private typeServ:MovementTypeService,private moneyServ:MoneyService,private walletServ:WalletService) {
+  constructor(private formBuilder:FormBuilder, private typeServ:MovementTypeService,private moneyServ:MoneyService,private walletServ:WalletService, private operationsServ:OperationsService) {
     this.form= this.formBuilder.group(
       {
         money:[0,[]],
@@ -173,5 +175,24 @@ export class OperationPanelComponent implements OnInit {
     let moneyIndex=this.listMoney.findIndex((x:any)=> Number(x.id)==Number(idMoney));
     const money= this.listMoney[moneyIndex]["nombre"]; 
     this.onOperation(event,money,idMoney,movementType,quantity);
+
+
+
+
+    /* Movimiento de prueba */
+    let movimiento = {
+      "id": 1,
+      "fk_billeteraMoneda_Origen": 4,
+      "fk_billeteraMoneda_Destino": 2,
+      "cantidad_Origen": 222.0,
+      "cantidad_Destino": 777.0,
+      "fecha": "2022-03-12T12:03:06.0166459-03:00",
+      "fk_tipoMovimiento": 3
+    };
+
+    this.operationsServ.post(movimiento).subscribe((data:any)=>{
+      // alert("ok");
+      // this.operationsServ.initializeData();
+    });
   }
 }
