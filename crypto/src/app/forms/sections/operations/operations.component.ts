@@ -7,14 +7,14 @@ import { OperationsService } from 'src/app/services/operations.service';
   styleUrls: ['./operations.component.css']
 })
 export class OperationsComponent implements OnInit {
+  idUsuario:number=2; //hacerlo dinamico
+  operations:any; 
 
-  operations:{tipo:string, amount:number,date:string}[]
-
-  constructor(operations:OperationsService) { 
-    this.operations=operations.get();
-  }
+  constructor(private operationsServ:OperationsService) {this.operations=[];  }
 
   ngOnInit(): void {
+    this.operationsServ.get(this.idUsuario).subscribe(data=>{ console.log(data); this.operations=data; });
+    console.log(this.operations);    
   }
 
 }

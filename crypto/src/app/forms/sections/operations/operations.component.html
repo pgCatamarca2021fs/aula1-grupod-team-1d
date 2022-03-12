@@ -2,17 +2,23 @@
     <thead>
       <tr>
         <th scope="col">Fecha</th>
-        <th scope="col">Movimiento</th>
-        <th scope="col">Importe Cotizado</th>
+        <th scope="col">Billetera Origen</th>
+        <th scope="col">Billetera Destino</th>
+        <th scope="col">Cantidad Origen</th>
+        <th scope="col">Cantidad Destino</th>
+        <th scope="col">Tipo de Movimiento</th>
         <th scope="col">Importe</th>
       </tr>
     </thead>
     <tbody >
       <tr *ngFor="let operation of operations">
-        <td>{{operation.date}}</td>
-        <td>{{operation.tipo}}</td>
+        <td>{{operation.fecha}}</td>
+        <td>{{operation.fk_billeteraMoneda_Origen}}</td>
+        <td>{{operation.fk_billeteraMoneda_Destino}}</td>
+        <td>{{operation.cantidad_Origen}}</td>
+        <td>{{operation.cantidad_Origen}}</td>
+        <td>{{operation.fk_tipoMovimiento}}</td>
         <td><i class="bi bi-coin"></i> 1</td>
-        <td>{{operation.amount}}</td>
       </tr>
     </tbody>
   </table>

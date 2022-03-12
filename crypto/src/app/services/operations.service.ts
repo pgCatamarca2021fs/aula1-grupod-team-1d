@@ -1,17 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+export interface Operation{
+  id:number, fk_billeteraMoneda_Origen:number, fk_billeteraMoneda_Destino:number, cantidad_Origen:number, cantidad_Destino:number, fecha:string, fk_tipoMovimiento:number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperationsService {
+  private urlApi:string='https://localhost:44361/api/Movimiento/';
 
-  private operations:{tipo:string, amount:number,date:string}[]
-
-  get(){
-    return this.operations
+  private operation:{id:number, fk_billeteraMoneda_Origen:number, fk_billeteraMoneda_Destino:number, cantidad_Origen:number, cantidad_Destino:number, fecha:string, fk_tipoMovimiento:number;}[]
+  
+  constructor(private http:HttpClient) { 
+    this.operation=[];
   }
 
-  constructor() {
-    this.operations=[{tipo:"Compra DogeCoin", amount:1500,date:"15/01/2022"}, {tipo:"Venta DogeCoin", amount:500,date:"15/01/2022"}, {tipo:"Compra EtherCoin", amount:1000,date:"18/01/2022"}, {tipo:"Compra DogeCoin", amount:1500,date:"20/01/2022"}, {tipo:"Compra Ethercoin", amount:500,date:"22/01/2022"}]
-   }
+  public get(idUsuario:number): Observable<Operation> {
+    return this.http.get<Operation>(this.urlApi+idUsuario);
+  } 
 }
