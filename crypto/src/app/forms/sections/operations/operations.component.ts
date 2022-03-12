@@ -93,10 +93,6 @@ export class OperationsComponent implements OnInit {
 
         let movimiento = {
           id: operation.id, 
-          fk_billeteraMoneda_Origen: operation.fk_billeteraMoneda_Origen,
-          billetera_Origen: billetera_Origen?.idBilletera, 
-          fk_billeteraMoneda_Destino: operation.fk_billeteraMoneda_Destino, 
-          billetera_Destino: billetera_Destino.idBilletera, 
           cantidad_Origen: operation.cantidad_Origen,
           moneda_Origen: this.coins.find((coin: Money) => coin.id == billetera_Origen?.idMoneda), 
           cantidad_Destino: operation.cantidad_Destino,

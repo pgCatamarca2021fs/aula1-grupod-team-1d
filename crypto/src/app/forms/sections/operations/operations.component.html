@@ -2,8 +2,6 @@
     <thead>
       <tr>
         <th scope="col">Fecha</th>
-        <th scope="col">Billetera Origen (HASH)</th>
-        <th scope="col">Billetera Destino (HASH)</th>
         <th scope="col">Egreso</th>
         <th scope="col">Ingreso</th>
         <th scope="col">Tipo de Movimiento</th>
@@ -12,8 +10,6 @@
     <tbody >
       <tr *ngFor="let operation of operationsReadable">
         <td>{{operation.fecha}}</td>
-        <td>{{operation.fk_billeteraMoneda_Origen}}</td>
-        <td>{{operation.fk_billeteraMoneda_Destino}}</td>
         <td>{{operation.cantidad_Origen}} <i class="bi bi-coin"></i> {{operation.moneda_Origen.nombre}}</td>
         <td>{{operation.cantidad_Destino}} <i class="bi bi-coin"></i> {{operation.moneda_Destino.nombre}}</td>
         <td>{{operation.tipoMovimiento}}</td>
