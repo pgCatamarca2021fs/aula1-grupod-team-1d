@@ -93,19 +93,21 @@ export class OperationsComponent implements OnInit {
         let da = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(date);
         let fecha = `${da}/${mo}/${ye}`;
 
-        return {
+        let movimiento = {
           id: operation.id, 
           fk_billeteraMoneda_Origen: operation.fk_billeteraMoneda_Origen,
-          billetera_Origen: billetera_Origen.idBilletera, 
+          billetera_Origen: billetera_Origen?.idBilletera, 
           fk_billeteraMoneda_Destino: operation.fk_billeteraMoneda_Destino, 
           billetera_Destino: billetera_Destino.idBilletera, 
           cantidad_Origen: operation.cantidad_Origen,
-          moneda_Origen: this.coins.find((coin: Money) => coin.id == billetera_Origen.idMoneda), 
+          moneda_Origen: this.coins.find((coin: Money) => coin.id == billetera_Origen?.idMoneda), 
           cantidad_Destino: operation.cantidad_Destino,
           moneda_Destino: this.coins.find((coin: Money) => coin.id == billetera_Destino.idMoneda), 
           fecha: fecha, 
           tipoMovimiento: this.movementTypes.find((movementType: MovementType) => movementType.id == operation.fk_tipoMovimiento).descripcion, 
-        };
+        }
+
+        return movimiento;
       });
 
       console.log("operationsReadable",this.operationsReadable); 
