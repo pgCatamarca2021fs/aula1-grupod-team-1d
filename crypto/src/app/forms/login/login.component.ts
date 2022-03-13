@@ -12,6 +12,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorSession: boolean = false;
+  spinner:boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private loginService:LoginService, private cookie: CookieService) {
     this.loginForm = this.fb.group({
@@ -24,23 +25,39 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.spinner = true;
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
     this.loginService.login(email, password)
       .subscribe({
         next: (responseOK) => {         
-          console.log(responseOK);         
-          this.cookie.set('token', responseOK, 4, '/');
-          this.router.navigate(['/dashboard']);
-          console.log('Sesion iniciada correcta');         
+          console.log(responseOK);
+          if(responseOK.email != ""){            
+            localStorage.setItem('id', responseOK.lista[0].id);  
+            localStorage.setItem('email', responseOK.email);  
+            localStorage.setItem('token', responseOK.token);   
+
+            this.spinner = false;
+            this.router.navigate(['/dashboard']);
+            console.log('Sesion iniciada correcta');
+          } else {
+            this.spinner = false;
+            console.log('Ocurrio error con tu email o password');  
+            this.errorSession = true;       
+            setTimeout(()=>{
+              this.errorSession = false;
+            },3000);                  
+
+          }
+          
        },
        error: (responseFail) => {         
           console.log('Ocurrio error con tu email o password');  
           this.errorSession = true;       
           setTimeout(()=>{
             this.errorSession = false;
-          },2000);          
+          },3000);          
        }      
      });
   }  
