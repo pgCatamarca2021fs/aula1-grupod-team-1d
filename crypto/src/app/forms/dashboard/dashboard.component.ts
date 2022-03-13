@@ -9,6 +9,7 @@ import { WalletService } from 'src/app/services/wallet.service';
 export class DashboardComponent implements OnInit {
   idUsuario:number=2; //hacerlo dinamico
   wallet:any; 
+  refreshGrid : boolean = false;
   
   constructor(private walletServ:WalletService) {this.wallet=[];  }
 
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit {
   walletAll(walletResponse:boolean) {
     console.log(walletResponse);
     this.walletServ.get(this.idUsuario).subscribe(data=>{ console.log("obtenido",data); this.wallet=data; });
-   }
+    this.refreshGrid = true;
+  }
 
 }
