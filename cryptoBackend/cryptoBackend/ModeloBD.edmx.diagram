@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="cryptomarcaModel.bancos" Width="1.5" PointX="1.5" PointY="17.5" />
         <EntityTypeShape EntityType="cryptomarcaModel.billeterasMonedas" Width="1.5" PointX="3" PointY="1.375" />
         <EntityTypeShape EntityType="cryptomarcaModel.monedas" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="cryptomarcaModel.movimientos" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="cryptomarcaModel.paises" Width="1.5" PointX="1.5" PointY="15" />
         <EntityTypeShape EntityType="cryptomarcaModel.provincias" Width="1.5" PointX="1.5" PointY="11.875" />
         <EntityTypeShape EntityType="cryptomarcaModel.tipoMovimientos" Width="1.5" PointX="3" PointY="5.75" />
@@ -16,13 +15,12 @@
         <AssociationConnector Association="cryptomarcaModel.FK_usuarios_bancos" />
         <AssociationConnector Association="cryptomarcaModel.FK_billeterasMonedas_monedas" />
         <AssociationConnector Association="cryptomarcaModel.FK_billeterasMonedas_usuarios" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMonedas" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_monedas" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_monedas1" />
-        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_tipoMovimientos" />
         <AssociationConnector Association="cryptomarcaModel.FK_provincias_paises" />
         <AssociationConnector Association="cryptomarcaModel.FK_usuarios_provincias" />
-      </Diagram>
+        <EntityTypeShape EntityType="cryptomarcaModel.movimientos" Width="3.25" PointX="5.25" PointY="1.125" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" />
+        <AssociationConnector Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
