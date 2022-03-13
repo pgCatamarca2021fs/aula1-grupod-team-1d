@@ -45,6 +45,7 @@ interface MovementType
   styleUrls: ['./operations.component.css']
 })
 export class OperationsComponent implements OnInit {
+  @Input() refreshGrid : boolean = false;
   idUsuario:number=2; //hacerlo dinamico
   operations:any; 
   operationsReadable: any;
@@ -111,5 +112,10 @@ export class OperationsComponent implements OnInit {
   ngOnInit(): void {
     this.initializeData();
   }
-
+  
+  ngOnChanges(){
+    if(this.refreshGrid){
+      this.initializeData();
+    } 
+  }
 }
