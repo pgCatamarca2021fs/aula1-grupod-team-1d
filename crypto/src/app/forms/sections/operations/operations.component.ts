@@ -45,6 +45,7 @@ interface MovementType
   styleUrls: ['./operations.component.css']
 })
 export class OperationsComponent implements OnInit {
+  @Input() refreshGrid : boolean = false;
   idUsuario:number=2; //hacerlo dinamico
   operations:any; 
   operationsReadable: any;
@@ -58,9 +59,11 @@ export class OperationsComponent implements OnInit {
     this.wallets=[];
     this.movementTypes=[];
     this.coins=[];
+
+    this.initializeData();
   }
 
-  initializeData() {
+  async initializeData() {
     this.typeServ.list().subscribe(data=>{ 
       // console.log("movementTypes",data); 
       this.movementTypes=data; 
@@ -76,7 +79,7 @@ export class OperationsComponent implements OnInit {
       this.coins=data; 
     });
 
-    this.operationsServ.get(this.idUsuario).subscribe(data=>{ 
+    await this.operationsServ.get(this.idUsuario).subscribe(data=>{ 
       //console.log("operations",data); 
       
       this.operations=data; 
@@ -111,5 +114,10 @@ export class OperationsComponent implements OnInit {
   ngOnInit(): void {
     this.initializeData();
   }
-
+  
+  ngOnChanges(){
+    if(this.refreshGrid){
+      this.initializeData();
+    } 
+  }
 }
