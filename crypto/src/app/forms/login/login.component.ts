@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
        },
        error: (responseFail) => {         
           console.log('Ocurrio error con tu email o password');  
+          this.spinner = false;
           this.errorSession = true;       
           setTimeout(()=>{
             this.errorSession = false;
