@@ -59,9 +59,11 @@ export class OperationsComponent implements OnInit {
     this.wallets=[];
     this.movementTypes=[];
     this.coins=[];
+
+    this.initializeData();
   }
 
-  initializeData() {
+  async initializeData() {
     this.typeServ.list().subscribe(data=>{ 
       // console.log("movementTypes",data); 
       this.movementTypes=data; 
@@ -77,7 +79,7 @@ export class OperationsComponent implements OnInit {
       this.coins=data; 
     });
 
-    this.operationsServ.get(this.idUsuario).subscribe(data=>{ 
+    await this.operationsServ.get(this.idUsuario).subscribe(data=>{ 
       //console.log("operations",data); 
       
       this.operations=data; 
