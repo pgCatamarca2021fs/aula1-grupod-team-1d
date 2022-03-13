@@ -1,17 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Operation } from '../classs/Operation';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WalletService {
+  private urlApi:string='https://localhost:44361/api/BilleteraMonedas/';
 
-  private wallet:{name:string, price:number}[]
+  private wallet:{precio:number,moneda:string, idBilletera:number, idMoneda:number}[]
   
-  get(){
-    return this.wallet
+  constructor(private http:HttpClient) { 
+    this.wallet=[];
   }
 
-  constructor() { 
-    this.wallet=[{name:"bitcoin", price:1500}, {name:"ethercoin", price:1520}, {name:"dogecoin", price:1000}, {name:"pesos", price:6000}]
+  get(idUsuario:number){
+    return this.http.get(this.urlApi+idUsuario);
   }
+  
+  post(opera:Operation):Observable<any>{
+    return this.http.post(this.urlApi,opera)
+  }
+  
 }

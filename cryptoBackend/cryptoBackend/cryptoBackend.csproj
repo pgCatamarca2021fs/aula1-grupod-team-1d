@@ -182,9 +182,11 @@
       <DependentUpon>ModeloBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BancoController.cs" />
+    <Compile Include="Controllers\BilleteraMonedasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
+    <Compile Include="Controllers\MovimientoController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
@@ -210,6 +212,7 @@
       <DependentUpon>ModeloBD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Banco.cs" />
+    <Compile Include="Models\Operacion.cs" />
     <Compile Include="Models\FuncionesComunes.cs" />
     <Compile Include="Models\GestorUsuario.cs" />
     <Compile Include="Models\Login.cs" />
@@ -305,6 +308,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Banco\" />
+    <Folder Include="Views\BilleteraMonedas\" />
     <Folder Include="Views\Persona\" />
   </ItemGroup>
   <ItemGroup>

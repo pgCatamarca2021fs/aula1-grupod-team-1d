@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UltimasCotizacionesService } from 'src/app/services/ultimas-cotizaciones.service';
 import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
@@ -7,17 +6,20 @@ import { WalletService } from 'src/app/services/wallet.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit { 
+export class DashboardComponent implements OnInit {
+  idUsuario:number=2; //hacerlo dinamico
   wallet:any; 
-
-  get resultados(){       
-    return this.ultimasCotizacionesService.resultados; 
-  }
   
-  constructor(private walletServ:WalletService, private ultimasCotizacionesService:UltimasCotizacionesService) {  }
+  constructor(private walletServ:WalletService) {this.wallet=[];  }
 
-  ngOnInit (): void {
-    this.wallet=this.walletServ.get();
-    this.ultimasCotizacionesService.getCotizaciones();
-    }
+  ngOnInit(): void {
+    this.walletServ.get(this.idUsuario).subscribe(data=>{ console.log(data); this.wallet=data; });
+    console.log("aaa",this.wallet);    
   }
+
+  walletAll(walletResponse:boolean) {
+    console.log(walletResponse);
+    this.walletServ.get(this.idUsuario).subscribe(data=>{ console.log("obtenido",data); this.wallet=data; });
+   }
+
+}
