@@ -25,35 +25,28 @@
       <div class="col-md-6">
         <app-operation-panel [wallet]="wallet" (walletResponse)="walletAll($event)"></app-operation-panel>
       </div>      
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card card-transfer text-white mb-3">
-          <h5 class="card-header"><i class="bi bi-cash-coin"></i> &nbsp;Transferir</h5>
-          <div class="card-body">      
-            <form>
-              <div class="row justify-content-center">
-                <div class="col mb-3">
-                    <label for="drMoney" class="form-label">Moneda</label>
-                    <select class="form-control" id="drMoney">
-                      <option selected>Seleccione</option>
-                    </select>
-                </div>                
-                <div class="col mb-3 text-center">
-                  <p class="money" #moneyP>$0</p>
+          <h5 class="card-header"><i class="bi bi-cash-coin"></i> &nbsp;Últimas cotizaciones</h5>
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div class="col mb-3">
+                <table class="table text-white">
+                  <thead>
+                    <tr>
+                      <th scope="col">Moneda</th>
+                      <th scope="col">Cotización</th>                              
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of resultados">
+                      <td scope="row">{{item[0]}}</td>
+                      <td>{{item[1]}}</td>
+                    </tr>
+                  </tbody>
+                </table>                  
               </div>
-              </div> 
-              <div class="row justify-content-center">
-                <div class="col mb-3">
-                    <label for="txtnumber" class="form-label">Cantidad</label>
-                    <input id="txtnumber" class="form-control" placeholder="cantidad" type="number" step="0.00001">
-                </div>
-                <div class="col"></div>
-              </div>
-              <div class="row">
-                  <div class="col mb-3 text-center">            
-                      <a class="btn btn-success px-4 py-3"  routerLink="/dashboard">Transferir</a>
-                  </div>                    
-              </div>
-          </form>
+            </div> 
           </div>
         </div>
       </div>

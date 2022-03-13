@@ -44,10 +44,24 @@
           </div>    
         </div>
 
+        <div *ngIf="spinner==true" id="spinner">
+          <div class="sk-chase">
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+          </div>
+        </div>
+
+        <div class="alert alert-success" role="alert" *ngIf="mensaje==true">
+          El mensaje fue enviado exitosamente
+        </div>    
+
         <div class="d-grid d-sm-flex gap-3">
           <button [disabled]="contactForm.invalid" class="btn btn-primary my-2">Enviar Mensaje</button>
         </div>
-
       </div>      
     </div>        
   </form>      

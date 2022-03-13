@@ -36,7 +36,16 @@
               </div>    
           </div>
 
-
+          <div *ngIf="spinner==true" id="spinner">
+            <div class="sk-chase">
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+            </div>
+          </div>
 
           <div class="d-grid d-sm-flex gap-3">
             <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success my-2">Iniciar Sesion</button>

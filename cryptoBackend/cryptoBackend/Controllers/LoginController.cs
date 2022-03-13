@@ -15,25 +15,42 @@ namespace cryptoBackend.Controllers
         cryptomarcaEntities db = new cryptomarcaEntities();
 
         // GET: api/Login
-        public IHttpActionResult Post([FromBody] Usuario model)
+        public Login Post([FromBody] Usuario model)
         {
+            Login oR = new Login();
+            oR.email = "";
+            oR.token = "";
+            oR.lista = null;
+
             try
             {
+                
                 var lst = db.usuarios.Where(d => d.email == model.Email && d.password == model.Password);
                 if (lst.Count() > 0)
                 {
                     var token = Guid.NewGuid().ToString();
-                    return Ok(token);
+
+                    
+                    
+                    oR.email = model.Email;
+                    oR.token = token;
+                    oR.lista = lst;
+
+                    return oR;
+                    //return Ok(token);                    
                 }
                 else
                 {
-                    return NotFound();
+
+                    return oR;
+                    //return NotFound();
                 }
                     
             }
             catch (Exception e)
             {
-                return NotFound();
+                return oR;
+                //return NotFound();
             }
 
         }
