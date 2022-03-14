@@ -54,11 +54,11 @@ namespace cryptoBackend.Controllers
         // POST: api/Movimiento
         public IHttpActionResult Post([FromBody] movimientos movimiento)
         {
-            if (movimiento.id <= 0) return NotFound();
-            if ((movimiento.fk_billeteraMoneda_Origen <= 0) && (movimiento.fk_billeteraMoneda_Origen != null)) return NotFound();
+            //if (movimiento.id <= 0) return NotFound();
+            if ((movimiento.fk_billeteraMoneda_Origen < 0)) return NotFound();
             if (movimiento.fk_billeteraMoneda_Destino <= 0) return NotFound();
-            if ((movimiento.cantidad_Origen <= 0) && (movimiento.cantidad_Origen != null)) return NotFound();
-            if (movimiento.cantidad_Destino <= 0) return NotFound();
+            //if (movimiento.cantidad_Origen < 0) return NotFound();
+            //if (movimiento.cantidad_Destino <= 0) return NotFound();
             if (movimiento.fk_tipoMovimiento <= 0) return NotFound();
 
             try
@@ -67,12 +67,12 @@ namespace cryptoBackend.Controllers
                 {
                     movimientos newMovimiento = new movimientos()
                     {
-                        id = movimiento.id,
+                        //id = movimiento.id,
                         fk_billeteraMoneda_Origen = movimiento.fk_billeteraMoneda_Origen,
                         fk_billeteraMoneda_Destino = movimiento.fk_billeteraMoneda_Destino,
                         cantidad_Origen = movimiento.cantidad_Origen,
                         cantidad_Destino = movimiento.cantidad_Destino,
-                        fecha = movimiento.fecha,
+                        fecha = DateTime.Now, //movimiento.fecha,
                         fk_tipoMovimiento = movimiento.fk_tipoMovimiento
                     };
 

@@ -23,7 +23,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <app-operation-panel [wallet]="wallet" (walletResponse)="walletAll($event)"></app-operation-panel>
+        <app-operation-panel [wallet]="wallet" [resultsDay]="resultados" (walletResponse)="walletAll($event)"></app-operation-panel>
       </div>      
       <div class="col-md-6">
         <div class="card card-transfer text-white mb-3">
@@ -56,7 +56,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <app-operations [refreshGrid]="refreshGrid"></app-operations>
+          <app-operations [operations]="operations" [refreshGrid]="refreshGrid"></app-operations>
         </div>
       </div>
     </div>

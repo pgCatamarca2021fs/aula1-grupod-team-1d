@@ -14,19 +14,10 @@ namespace cryptoBackend
     
     public partial class monedas
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public monedas()
-        {
-            this.billeterasMonedas = new HashSet<billeterasMonedas>();
-        }
-    
         public long id { get; set; }
         public string nombre { get; set; }
         public decimal cotizacion { get; set; }
         public System.DateTime fecha_cotizacion { get; set; }
         public string direccion_contrato { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<billeterasMonedas> billeterasMonedas { get; set; }
     }
 }

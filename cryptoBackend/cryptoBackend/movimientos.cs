@@ -21,8 +21,5 @@ namespace cryptoBackend
         public decimal cantidad_Destino { get; set; }
         public System.DateTime fecha { get; set; }
         public decimal fk_tipoMovimiento { get; set; }
-    
-        public virtual billeterasMonedas billeterasMonedas { get; set; }
-        public virtual billeterasMonedas billeterasMonedas1 { get; set; }
     }
 }
