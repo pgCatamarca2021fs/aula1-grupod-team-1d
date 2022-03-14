@@ -79,7 +79,7 @@ namespace cryptoBackend.Controllers
                     }*/
 
 
-                    if (billetera.id == 0) db.billeterasMonedas.Add(billetera);
+                    if (billetera.id == 0) billetera=db.billeterasMonedas.Add(billetera);
                     db.SaveChanges();
                     
                 }

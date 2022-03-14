@@ -8,11 +8,12 @@
       </tr>
     </thead>
     <tbody >
-      <tr *ngFor="let operation of operationsReadable">
+      <tr *ngFor="let operation of operations">
         <td>{{operation.fecha}}</td>
-        <td>{{operation.cantidad_Origen}} <i class="bi bi-coin"></i> {{operation.moneda_Origen.nombre}}</td>
-        <td>{{operation.cantidad_Destino}} <i class="bi bi-coin"></i> {{operation.moneda_Destino.nombre}}</td>
-        <td>{{operation.tipoMovimiento}}</td>
+        <td>{{operation.cantidad_Origen}}</td>
+        <td>{{operation.cantidad_Destino}}</td>        
+        <td>{{operation.fk_tipoMovimiento}}</td>
+        
       </tr>
     </tbody>
   </table>

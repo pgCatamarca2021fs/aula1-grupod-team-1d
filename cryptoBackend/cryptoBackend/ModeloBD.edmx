@@ -250,7 +250,6 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuarios" Relationship="cryptomarcaModel.FK_usuarios_bancos" FromRole="bancos" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="billeterasMonedas">
           <Key>
@@ -260,11 +259,7 @@
           <Property Name="fk_usuario" Type="Int64" Nullable="false" />
           <Property Name="fk_moneda" Type="Int64" Nullable="false" />
           <Property Name="cantidad" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
-          <NavigationProperty Name="monedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_monedas" FromRole="billeterasMonedas" ToRole="monedas" />
-          <NavigationProperty Name="usuarios" Relationship="cryptomarcaModel.FK_billeterasMonedas_usuarios" FromRole="billeterasMonedas" ToRole="usuarios" />
-          <NavigationProperty Name="movimientos" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" FromRole="billeterasMonedas" ToRole="movimientos" />
-          <NavigationProperty Name="movimientos1" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" FromRole="billeterasMonedas" ToRole="movimientos" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="monedas">
           <Key>
             <PropertyRef Name="id" />
@@ -274,7 +269,6 @@
           <Property Name="cotizacion" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
           <Property Name="fecha_cotizacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="direccion_contrato" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_monedas" FromRole="monedas" ToRole="billeterasMonedas" />
         </EntityType>
         <EntityType Name="movimientos">
           <Key>
@@ -287,16 +281,13 @@
           <Property Name="cantidad_Destino" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fk_tipoMovimiento" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
-          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" FromRole="movimientos" ToRole="billeterasMonedas" />
-          <NavigationProperty Name="billeterasMonedas1" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" FromRole="movimientos" ToRole="billeterasMonedas" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="paises">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="provincias" Relationship="cryptomarcaModel.FK_provincias_paises" FromRole="paises" ToRole="provincias" />
         </EntityType>
         <EntityType Name="provincias">
           <Key>
@@ -305,8 +296,6 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="fk_pais" Type="Int64" />
-          <NavigationProperty Name="paises" Relationship="cryptomarcaModel.FK_provincias_paises" FromRole="provincias" ToRole="paises" />
-          <NavigationProperty Name="usuarios" Relationship="cryptomarcaModel.FK_usuarios_provincias" FromRole="provincias" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="tipoMovimientos">
           <Key>
@@ -329,9 +318,6 @@
           <Property Name="cbu" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="bancos" Relationship="cryptomarcaModel.FK_usuarios_bancos" FromRole="usuarios" ToRole="bancos" />
-          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_usuarios" FromRole="usuarios" ToRole="billeterasMonedas" />
-          <NavigationProperty Name="provincias" Relationship="cryptomarcaModel.FK_usuarios_provincias" FromRole="usuarios" ToRole="provincias" />
         </EntityType>
         <Association Name="FK_usuarios_bancos">
           <End Type="cryptomarcaModel.bancos" Role="bancos" Multiplicity="1" />
