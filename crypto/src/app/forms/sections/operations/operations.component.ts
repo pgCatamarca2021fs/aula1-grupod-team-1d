@@ -46,7 +46,8 @@ interface MovementType
 })
 export class OperationsComponent implements OnInit {
   @Input() refreshGrid : boolean = false;
-  idUsuario:number=2; //hacerlo dinamico
+  idUsuario = Number(localStorage.getItem('id'));
+  //idUsuario:number=2; //hacerlo dinamico
   operations:any; 
   operationsReadable: any;
   wallets: any;
