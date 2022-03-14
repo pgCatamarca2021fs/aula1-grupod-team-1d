@@ -210,6 +210,7 @@
           <EntitySet Name="bancos" EntityType="cryptomarcaModel.bancos" />
           <EntitySet Name="billeterasMonedas" EntityType="cryptomarcaModel.billeterasMonedas" />
           <EntitySet Name="monedas" EntityType="cryptomarcaModel.monedas" />
+          <EntitySet Name="movimientos" EntityType="cryptomarcaModel.movimientos" />
           <EntitySet Name="paises" EntityType="cryptomarcaModel.paises" />
           <EntitySet Name="provincias" EntityType="cryptomarcaModel.provincias" />
           <EntitySet Name="tipoMovimientos" EntityType="cryptomarcaModel.tipoMovimientos" />
@@ -226,15 +227,6 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
           </AssociationSet>
-          <AssociationSet Name="FK_provincias_paises" Association="cryptomarcaModel.FK_provincias_paises">
-            <End Role="paises" EntitySet="paises" />
-            <End Role="provincias" EntitySet="provincias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usuarios_provincias" Association="cryptomarcaModel.FK_usuarios_provincias">
-            <End Role="provincias" EntitySet="provincias" />
-            <End Role="usuarios" EntitySet="usuarios" />
-          </AssociationSet>
-          <EntitySet Name="movimientos" EntityType="cryptomarcaModel.movimientos" />
           <AssociationSet Name="FK_movimientos_billeterasMoneda_Destino" Association="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino">
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
             <End Role="movimientos" EntitySet="movimientos" />
@@ -243,13 +235,22 @@
             <End Role="billeterasMonedas" EntitySet="billeterasMonedas" />
             <End Role="movimientos" EntitySet="movimientos" />
           </AssociationSet>
-          </EntityContainer>
+          <AssociationSet Name="FK_provincias_paises" Association="cryptomarcaModel.FK_provincias_paises">
+            <End Role="paises" EntitySet="paises" />
+            <End Role="provincias" EntitySet="provincias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_provincias" Association="cryptomarcaModel.FK_usuarios_provincias">
+            <End Role="provincias" EntitySet="provincias" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="bancos">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuarios" Relationship="cryptomarcaModel.FK_usuarios_bancos" FromRole="bancos" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="billeterasMonedas">
           <Key>
@@ -259,6 +260,8 @@
           <Property Name="fk_usuario" Type="Int64" Nullable="false" />
           <Property Name="fk_moneda" Type="Int64" Nullable="false" />
           <Property Name="cantidad" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
+          <NavigationProperty Name="monedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_monedas" FromRole="billeterasMonedas" ToRole="monedas" />
+          <NavigationProperty Name="usuarios" Relationship="cryptomarcaModel.FK_billeterasMonedas_usuarios" FromRole="billeterasMonedas" ToRole="usuarios" />
           <NavigationProperty Name="movimientos" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" FromRole="billeterasMonedas" ToRole="movimientos" />
           <NavigationProperty Name="movimientos1" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" FromRole="billeterasMonedas" ToRole="movimientos" />
         </EntityType>
@@ -271,6 +274,21 @@
           <Property Name="cotizacion" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
           <Property Name="fecha_cotizacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="direccion_contrato" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_monedas" FromRole="monedas" ToRole="billeterasMonedas" />
+        </EntityType>
+        <EntityType Name="movimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_billeteraMoneda_Origen" Type="Int64" />
+          <Property Name="fk_billeteraMoneda_Destino" Type="Int64" Nullable="false" />
+          <Property Name="cantidad_Origen" Type="Decimal" Precision="22" Scale="6" />
+          <Property Name="cantidad_Destino" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fk_tipoMovimiento" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Destino" FromRole="movimientos" ToRole="billeterasMonedas" />
+          <NavigationProperty Name="billeterasMonedas1" Relationship="cryptomarcaModel.FK_movimientos_billeterasMoneda_Origen" FromRole="movimientos" ToRole="billeterasMonedas" />
         </EntityType>
         <EntityType Name="paises">
           <Key>
@@ -278,6 +296,7 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="provincias" Relationship="cryptomarcaModel.FK_provincias_paises" FromRole="paises" ToRole="provincias" />
         </EntityType>
         <EntityType Name="provincias">
           <Key>
@@ -286,6 +305,8 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="fk_pais" Type="Int64" />
+          <NavigationProperty Name="paises" Relationship="cryptomarcaModel.FK_provincias_paises" FromRole="provincias" ToRole="paises" />
+          <NavigationProperty Name="usuarios" Relationship="cryptomarcaModel.FK_usuarios_provincias" FromRole="provincias" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="tipoMovimientos">
           <Key>
@@ -308,6 +329,9 @@
           <Property Name="cbu" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="bancos" Relationship="cryptomarcaModel.FK_usuarios_bancos" FromRole="usuarios" ToRole="bancos" />
+          <NavigationProperty Name="billeterasMonedas" Relationship="cryptomarcaModel.FK_billeterasMonedas_usuarios" FromRole="usuarios" ToRole="billeterasMonedas" />
+          <NavigationProperty Name="provincias" Relationship="cryptomarcaModel.FK_usuarios_provincias" FromRole="usuarios" ToRole="provincias" />
         </EntityType>
         <Association Name="FK_usuarios_bancos">
           <End Type="cryptomarcaModel.bancos" Role="bancos" Multiplicity="1" />
@@ -345,42 +369,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_provincias_paises">
-          <End Type="cryptomarcaModel.paises" Role="paises" Multiplicity="0..1" />
-          <End Type="cryptomarcaModel.provincias" Role="provincias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="paises">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="provincias">
-              <PropertyRef Name="fk_pais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_usuarios_provincias">
-          <End Type="cryptomarcaModel.provincias" Role="provincias" Multiplicity="1" />
-          <End Type="cryptomarcaModel.usuarios" Role="usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="provincias">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="usuarios">
-              <PropertyRef Name="fk_provincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="movimientos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fk_billeteraMoneda_Origen" Type="Int64" />
-          <Property Name="fk_billeteraMoneda_Destino" Type="Int64" Nullable="false" />
-          <Property Name="cantidad_Origen" Type="Decimal" Precision="22" Scale="6" />
-          <Property Name="cantidad_Destino" Type="Decimal" Nullable="false" Precision="22" Scale="6" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fk_tipoMovimiento" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
-        </EntityType>
         <Association Name="FK_movimientos_billeterasMoneda_Destino">
           <End Type="cryptomarcaModel.billeterasMonedas" Role="billeterasMonedas" Multiplicity="1" />
           <End Type="cryptomarcaModel.movimientos" Role="movimientos" Multiplicity="*" />
@@ -402,6 +390,30 @@
             </Principal>
             <Dependent Role="movimientos">
               <PropertyRef Name="fk_billeteraMoneda_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_provincias_paises">
+          <End Type="cryptomarcaModel.paises" Role="paises" Multiplicity="0..1" />
+          <End Type="cryptomarcaModel.provincias" Role="provincias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paises">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="provincias">
+              <PropertyRef Name="fk_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_provincias">
+          <End Type="cryptomarcaModel.provincias" Role="provincias" Multiplicity="1" />
+          <End Type="cryptomarcaModel.usuarios" Role="usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="fk_provincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -436,6 +448,19 @@
                 <ScalarProperty Name="fecha_cotizacion" ColumnName="fecha_cotizacion" />
                 <ScalarProperty Name="cotizacion" ColumnName="cotizacion" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movimientos">
+            <EntityTypeMapping TypeName="cryptomarcaModel.movimientos">
+              <MappingFragment StoreEntitySet="movimientos">
+                <ScalarProperty Name="fk_tipoMovimiento" ColumnName="fk_tipoMovimiento" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cantidad_Destino" ColumnName="cantidad_Destino" />
+                <ScalarProperty Name="cantidad_Origen" ColumnName="cantidad_Origen" />
+                <ScalarProperty Name="fk_billeteraMoneda_Destino" ColumnName="fk_billeteraMoneda_Destino" />
+                <ScalarProperty Name="fk_billeteraMoneda_Origen" ColumnName="fk_billeteraMoneda_Origen" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -477,19 +502,6 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="movimientos">
-            <EntityTypeMapping TypeName="cryptomarcaModel.movimientos">
-              <MappingFragment StoreEntitySet="movimientos">
-                <ScalarProperty Name="fk_tipoMovimiento" ColumnName="fk_tipoMovimiento" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="cantidad_Destino" ColumnName="cantidad_Destino" />
-                <ScalarProperty Name="cantidad_Origen" ColumnName="cantidad_Origen" />
-                <ScalarProperty Name="fk_billeteraMoneda_Destino" ColumnName="fk_billeteraMoneda_Destino" />
-                <ScalarProperty Name="fk_billeteraMoneda_Origen" ColumnName="fk_billeteraMoneda_Origen" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

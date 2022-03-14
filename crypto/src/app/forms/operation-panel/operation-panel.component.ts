@@ -17,7 +17,8 @@ export class OperationPanelComponent implements OnInit {
   @Input() wallet:any;
   @Output () walletResponse: EventEmitter<boolean> = new EventEmitter();
 
-  idUsuario:number=2;//usuario dinamico
+  idUsuario = Number(localStorage.getItem('id'));
+  //idUsuario:number=2;//usuario dinamico
   opera:Operation=new Operation();
   operaDestino:Operation= new Operation();
 
