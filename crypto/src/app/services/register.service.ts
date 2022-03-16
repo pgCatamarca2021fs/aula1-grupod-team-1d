@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ConfigApp } from '../classs/ConfigApp';
 
 export interface Register{
   nombre:string,
@@ -18,7 +19,7 @@ export interface Register{
 })
 
 export class RegisterService {
-  private urlApi:string='https://localhost:44361/api/Usuario/';
+  private urlApi:string;
   private register: {
     nombre:string,
     email:string,     
@@ -30,14 +31,18 @@ export class RegisterService {
     fechaNacimiento:Date;}[]
 
   constructor(private http:HttpClient) {
+    let conf:ConfigApp=new ConfigApp();
+    this.urlApi=conf.urlApi+'Usuario/';
     this.register=[];
    }
 
-   post(reg:Register):Observable<any>{
-    return this.http.post(this.urlApi,reg)
+  post(reg:Register):Observable<any>{
+    const respuesta = this.http.post(this.urlApi,reg)
+    return respuesta;
   }
 
   list():Observable<any> {
-    return this.http.get(this.urlApi);
+    const respuesta = this.http.get(this.urlApi);
+    return respuesta;
    }
 }

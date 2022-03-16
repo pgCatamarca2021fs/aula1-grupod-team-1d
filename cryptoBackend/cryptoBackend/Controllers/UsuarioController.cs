@@ -195,8 +195,9 @@ namespace cryptoBackend.Controllers
 
                     db.usuarios.Add(nuevo);
                     db.SaveChanges();
-                    oR.status = 1;
                     oR.data = nuevo;
+                    oR.status = 1;
+                    oR.message = "El registro fue exitoso";
                     return oR;
                 }
             }
@@ -353,7 +354,9 @@ namespace cryptoBackend.Controllers
                     db.SaveChanges();
                     oR.status = 1;
                     oR.data = usu;
+                    oR.message = "Los datos fueron actualizados exitosamente";
                     return oR;
+                    
                 }
             }
             catch (Exception e)

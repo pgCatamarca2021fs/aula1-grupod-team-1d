@@ -79,6 +79,7 @@ export class RegisterComponent implements OnInit {
         //alert("ok");
         // this.operationsServ.initializeData();
       });     
+      this.spinner = false;
 
     } else {
       console.log('Ocurrio un error con el registro');  
