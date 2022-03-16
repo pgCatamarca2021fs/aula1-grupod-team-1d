@@ -21,7 +21,7 @@ namespace cryptoBackend.Models
 
         public bool esNumero(string campo)
         {
-            return Regex.IsMatch(campo, @"^[1-9]+$");
+            return Regex.IsMatch(campo, @"^[0-9]+$");
         }
     }
 }

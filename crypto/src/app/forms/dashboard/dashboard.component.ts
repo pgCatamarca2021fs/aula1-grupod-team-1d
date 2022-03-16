@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
         let resultado = respuesta;
         for(let i in resultado) {    
           let nombre = i;
-          let cotizacion = resultado[i].USD;     
+          let cotizacion = resultado[i].EUR;     
           let array = [];
           array.push(nombre, cotizacion);
           this.resultados.push(array);            

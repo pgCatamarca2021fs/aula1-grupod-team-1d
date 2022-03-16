@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProvinciasService } from 'src/app/services/provincias.service';
+import { BancosService } from 'src/app/services/bancos.service';
+import { RegisterService } from 'src/app/services/register.service';
+
 
 @Component({
   selector: 'app-register',
@@ -9,34 +14,77 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorPassword: boolean = false;
+  listProvincias:any;
+  listProvinciasO:any;
+  listBancos:any;
+  listBancosO:any;
+  spinner:boolean = false;
+  errorSession: boolean = false;
+  provinciaSeleccionada: any;
+  bancoSeleccionado: any;
+  fechaNacimientoSeleccionada: Date = new Date();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router, private provinciasServ: ProvinciasService, private bancosServ: BancosService, private registerServ:RegisterService) {
     this.registerForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      apellido: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
+      dni: ['', [Validators.required, Validators.minLength(8)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      repitePassword: ['', [Validators.required]]      
+      repitePassword: ['', [Validators.required]],
+      cbu: ['', [Validators.required, Validators.minLength(20)]],
+      banco: ['', [Validators.required]],
+      provincia: ['', [Validators.required]],
+      fechaNacimiento: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
+    this.provinciasServ.list().subscribe(data=>{ this.listProvincias=data; this.listProvinciasO=data; });
+    this.bancosServ.list().subscribe(data=>{ this.listBancos=data; this.listBancosO=data; });
   }
 
   register() {
+    this.spinner = true;
     const nombre = this.registerForm.get('nombre')?.value;
-    const apellido = this.registerForm.get('apellido')?.value;
     const email = this.registerForm.get('email')?.value;
+    const dni = this.registerForm.get('dni')?.value;    
     const password = this.registerForm.get('password')?.value;
     const repitePassword = this.registerForm.get('repitePassword')?.value;
+    const cbu = this.registerForm.get('cbu')?.value;
+    const fechaNacimiento = this.registerForm.get('fechaNacimiento')?.value;
 
     if(this.verificarPassword(password, repitePassword)) {
-      console.log('Pasó la validación');
-      console.log('nombre: ', nombre);
-      console.log('apellido: ', apellido);
-      console.log('email: ', email);
-      console.log('password: ', password);
-      console.log('repite-password: ', repitePassword);   
+      let datos = {
+        "nombre": nombre,
+        "email": email,
+        "dni": dni,
+        "password": password,
+        "cbu": cbu,
+        "fk_provincia": this.provinciaSeleccionada.id | 0,
+        "fk_banco": this.bancoSeleccionado.id | 0,
+        "fechaNacimiento": fechaNacimiento    
+      };
+
+      this.registerServ.post(datos).subscribe((data:any)=>{
+        console.log(data);
+        
+        if(data.status === 1){
+          this.spinner = false;
+          this.router.navigate(['/login']);
+          console.log('Registro correcto');          
+          
+        } else {
+          this.spinner = false;
+        }
+        //alert("ok");
+        // this.operationsServ.initializeData();
+      });     
+      this.spinner = false;
+
+    } else {
+      console.log('Ocurrio un error con el registro');  
+      this.errorSession = true;       
+      this.spinner = false;
     }
   }
 
@@ -48,4 +96,19 @@ export class RegisterComponent implements OnInit {
     return false;
   }
 
+  selecionarProvincia(event: any) {
+    const id = event.target.value;
+
+    if(id != "null"){
+      this.provinciaSeleccionada = this.listProvincias.find((x: { id: any; }) => x.id == id);      
+    }
+  }
+
+  selecionarBanco(event: any) {
+    const id = event.target.value;
+
+    if(id != "null"){
+      this.bancoSeleccionado = this.listBancos.find((x: { id: any; }) => x.id == id);      
+    }
+  }
 }
