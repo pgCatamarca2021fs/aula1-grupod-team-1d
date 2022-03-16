@@ -11,7 +11,6 @@ import { OperationsService } from 'src/app/services/operations.service';
 })
 export class DashboardComponent implements OnInit {
   idUsuario = Number(localStorage.getItem('id'));
-  //idUsuario:number=2; //hacerlo dinamico
   wallet:any; 
   refreshGrid : boolean = false;
   public resultados:any[] = [];
@@ -21,11 +20,9 @@ export class DashboardComponent implements OnInit {
   constructor(private walletServ:WalletService, private ultimasCotizacionesService:UltimasCotizacionesService,private operationsServ:OperationsService) {this.wallet=[];  }
 
   ngOnInit(): void {
-    this.walletServ.get(this.idUsuario).subscribe(data=>{ this.wallet=data; });
+    this.walletServ.getBilleteraUsuario(this.idUsuario).subscribe(data=>{ this.wallet=data; console.log(data); });
     this.operationsServ.get(this.idUsuario).subscribe(data=>{  this.operations=data; });
-    //console.log(this.idUsuario);
     
-    //console.log("aaa",this.wallet);   
     this.ultimasCotizacionesService.getCotizaciones()
       .subscribe((respuesta:any) => {
         let resultado = respuesta;
@@ -46,9 +43,8 @@ export class DashboardComponent implements OnInit {
 
   walletAll(walletResponse:boolean) {
     console.log(walletResponse);
-    this.walletServ.get(this.idUsuario).subscribe(data=>{ 
-      //console.log("obtenido",data);
-    this.wallet=data;
+    this.walletServ.getBilleteraUsuario(this.idUsuario).subscribe(data=>{ 
+      this.wallet=data;
     
     this.operationsServ.get(this.idUsuario).subscribe(data=>this.operations=data);
     });
