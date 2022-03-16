@@ -10,6 +10,6 @@ export class UltimasCotizacionesService {
   constructor(private http: HttpClient) {  }
 
   getCotizaciones() {        
-    return this.http.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,DOGE,BNB,USDT,LTC&tsyms=USD")
+    return this.http.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,DOGE,BNB,USDT,LTC&tsyms=EUR")
   }
 }

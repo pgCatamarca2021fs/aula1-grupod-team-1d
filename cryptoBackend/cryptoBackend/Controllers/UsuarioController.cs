@@ -17,39 +17,60 @@ namespace cryptoBackend.Controllers
         FuncionesComunes funciones= new FuncionesComunes();
 
         // GET: api/Usuario
-        public IHttpActionResult Get()
+        public Respuesta Get()
         {
+            Respuesta oR = new Respuesta();
+            oR.status = 0;
+
             try
             {
                 using (db = new cryptomarcaEntities())
                 {
                     List<usuarios> lusuarios = db.usuarios.ToList();
-                    return Ok(lusuarios);
+                    oR.status = 1;
+                    oR.data = lusuarios;
+                    return oR;
                 }
             }
             catch (Exception e)
             {
-                return NotFound();
+                oR.data = e;
+                oR.message = "Ocurrió un problema en el servidor.";
+                return oR;
             }
         }
 
         // GET: api/Usuario/5
-        public IHttpActionResult Get(Int64 id)
+        public Respuesta Get(Int64 id)
         {
-            if (id <= 0) return NotFound();
+            Respuesta oR = new Respuesta();
+            oR.status = 0;
+
+            if (id <= 0) {
+                oR.message = "El id enviado no es válido";
+                return oR;
+            } 
 
             try
             {
                 using (db = new cryptomarcaEntities())
                 {
                     usuarios usuario = db.usuarios.Where(x => x.id == id).FirstOrDefault();
-                    if (usuario == null) return Ok();
-                    return Ok(usuario);
+                    if (usuario == null) {
+                        oR.message = "El usuario no existe";
+                        return oR;
+                    } else {
+                        oR.status = 1;
+                        oR.data = usuario;
+                        return oR;
+                    }                    
                 }
             }
             catch (Exception e)
             {
-                return NotFound();
+                oR.data = e;
+                oR.message = "Ocurrió un problema en el servidor.";
+                return oR; 
             }
         }        
 
@@ -71,38 +92,95 @@ namespace cryptoBackend.Controllers
         }
 
         // POST: api/Usuario
-        public IHttpActionResult Post([FromBody]usuarios nuevo)
+        public Respuesta Post([FromBody]usuarios nuevo)
         {
-            if (nuevo == null) return NotFound();
+            Respuesta oR = new Respuesta();
+            oR.status = 0;
 
-            //long cero o que posea algun caracter que no sea letra
-            if (nuevo.nombre==null || nuevo.nombre.Trim().Length == 0) return NotFound();
-            nuevo.nombre = nuevo.nombre.Trim();
-            if (!funciones.esLetra(nuevo.nombre)) return NotFound();
+            // Validación que se envíen datos
+            if (nuevo == null) {
+                oR.message = "No se ha enviado ningún dato";
+                return oR;                
+            }
 
-            //long cero y valida email regex
-            if (nuevo.email==null || nuevo.email.Trim().Length == 0) return NotFound();
-            nuevo.email = nuevo.email.Trim();
-            if (!funciones.esEmail(nuevo.email)) return NotFound();
+            //Validación del nombre
+            if (nuevo.nombre == null || nuevo.nombre.Trim().Length == 0) {
+                oR.message = "El nombre es un campo requerido";
+                return oR;
+            } 
+            
+            if (!funciones.esLetra(nuevo.nombre.Trim())) {
+                oR.message = "El nombre no puede contener números";
+                return oR;
+            }
 
-            //long cero
-            if (nuevo.password==null || nuevo.password.Trim().Length == 0) return NotFound();
-            nuevo.password = nuevo.password.Trim();
+            //Validación del email
+            if (nuevo.email == null || nuevo.email.Trim().Length == 0) {
+                oR.message = "El email es un campo requerido";
+                return oR;
+            } 
+                        
+            if (!funciones.esEmail(nuevo.email.Trim())) {
+                oR.message = "El email no es válido";
+                return oR;
+            }
 
-            if (nuevo.dni==null || nuevo.dni.Trim().Length <= 6) return NotFound();
-            nuevo.dni = nuevo.dni.Trim();
-            if (!funciones.esNumero(nuevo.dni)) return NotFound();
+            //Validación del password
+            if (nuevo.password == null || nuevo.password.Trim().Length == 0) {
+                oR.message = "El password es un campo requerido";
+                return oR;
+            }
 
-            if (nuevo.fk_provincia <= 0) return NotFound();
-            if (nuevo.fk_banco <= 0) return NotFound();
+            if (nuevo.password.Trim().Length < 6) {
+                oR.message = "El password debe contener al menos seis caracteres";
+                return oR;
+            }
 
-            if (nuevo.cbu==null || nuevo.cbu.Trim().Length == 0) return NotFound();
-            nuevo.cbu = nuevo.cbu.Trim();
-            if (!funciones.esNumero(nuevo.cbu)) return NotFound();
+            //Validación del dni            
+            if (nuevo.dni == null || nuevo.dni.Trim().Length == 0) {
+                oR.message = "El dni es un campo requerido";
+                return oR;
+            }
 
-            if (nuevo.fechaNacimiento == null || nuevo.fechaNacimiento.ToString("dd/MM/yyyy") == "01/01/0001") return NotFound();
+            if (!funciones.esNumero(nuevo.dni.Trim())) {
+                oR.message = "El dni no puede contener letras";
+                return oR;
+            }
+
+            //Validación de la provincia
+            if (nuevo.fk_provincia <= 0) {
+                oR.message = "Debe seleccionar una provincia";
+                return oR;
+            }
+
+            //Validación del banco
+            if (nuevo.fk_banco <= 0) {
+                oR.message = "Debe seleccionar un banco";
+                return oR;
+            }
+
+            //Validación del cbu
+            if (nuevo.cbu == null || nuevo.cbu.Trim().Length == 0) {
+                oR.message = "El cbu es un campo requerido";
+                return oR;
+            } 
+            
+            if (!funciones.esNumero(nuevo.cbu.Trim())) {
+                oR.message = "El cbu no puede contener letras";
+                return oR;
+            }
+
+            //Validación de la fecha de nacimiento
+            if (nuevo.fechaNacimiento == null || nuevo.fechaNacimiento.ToString("dd/MM/yyyy") == "01/01/0001") {
+                oR.message = "La fecha de nacimiento es un campo requerido";
+                return oR;
+            } 
+
             TimeSpan dias = DateTime.Now.Subtract(nuevo.fechaNacimiento);
-            if ( dias.Days/365 < 18) return NotFound();
+            if (dias.Days / 365 < 18) {
+                oR.message = "La persona debe ser mayor a 18 años para poder operar";
+                return oR;
+            }            
 
             try
             {
@@ -111,66 +189,156 @@ namespace cryptoBackend.Controllers
                     usuarios usuario = db.usuarios.Where(x => x.email == nuevo.email && x.password == nuevo.password).FirstOrDefault();
                     if (usuario != null)
                     {
-                        return NotFound();
+                        oR.message = "El usuario ya existe";
+                        return oR;
                     }
 
                     db.usuarios.Add(nuevo);
                     db.SaveChanges();
-                    return Created("Creado", nuevo);
+                    oR.status = 1;
+                    oR.data = nuevo;
+                    return oR;
                 }
             }
             catch (Exception e)
             {
-                return NotFound();
+                oR.data = e;
+                oR.message = "Ocurrió un problema en el servidor.";
+                return oR;
             }
         }
 
         // PUT: api/Usuario/5
-        public IHttpActionResult Put(Int64 id, [FromBody]usuarios usu)
+        public Respuesta Put(Int64 id, [FromBody]usuarios usu)
         {
-            if (usu == null) return NotFound();
+            Respuesta oR = new Respuesta();
+            oR.status = 0;
 
-            //long cero o que posea algun caracter que no sea letra
-            if (usu.nombre == null || usu.nombre.Trim().Length == 0) return NotFound();
-            usu.nombre = usu.nombre.Trim();
-            if (!funciones.esLetra(usu.nombre)) return NotFound();
+            // Validación que se envíen datos
+            if (usu == null) {
+                oR.message = "No se ha enviado ningún dato";
+                return oR;
+            }
 
-            //long cero y valida email regex
-            if (usu.email == null || usu.email.Trim().Length == 0) return NotFound();
-            usu.email = usu.email.Trim();
-            if (!funciones.esEmail(usu.email)) return NotFound();
+            // Validación que se envíen datos
+            if (usu == null)
+            {
+                oR.message = "No se ha enviado ningún dato";
+                return oR;
+            }
 
-            //long cero
-            if (usu.password == null || usu.password.Trim().Length == 0) return NotFound();
-            usu.password = usu.password.Trim();
+            //Validación del nombre
+            if (usu.nombre == null || usu.nombre.Trim().Length == 0)
+            {
+                oR.message = "El nombre es un campo requerido";
+                return oR;
+            }
 
-            if (usu.dni == null || usu.dni.Trim().Length <= 6) return NotFound();
-            usu.dni = usu.dni.Trim();
-            if (!funciones.esNumero(usu.dni)) return NotFound();
+            if (!funciones.esLetra(usu.nombre.Trim()))
+            {
+                oR.message = "El nombre no puede contener números";
+                return oR;
+            }
 
-            if (usu.fk_provincia <= 0) return NotFound();
-            if (usu.fk_banco <= 0) return NotFound();
+            //Validación del email
+            if (usu.email == null || usu.email.Trim().Length == 0)
+            {
+                oR.message = "El email es un campo requerido";
+                return oR;
+            }
 
-            if (usu.cbu == null || usu.cbu.Trim().Length == 0) return NotFound();
-            usu.cbu = usu.cbu.Trim();
-            if (!funciones.esNumero(usu.cbu)) return NotFound();
+            if (!funciones.esEmail(usu.email.Trim()))
+            {
+                oR.message = "El email no es válido";
+                return oR;
+            }
 
-            if (usu.fechaNacimiento == null || usu.fechaNacimiento.ToString("dd/MM/yyyy") == "01/01/0001") return NotFound();
-            
+            //Validación del password
+            if (usu.password == null || usu.password.Trim().Length == 0)
+            {
+                oR.message = "El password es un campo requerido";
+                return oR;
+            }
+
+            if (usu.password.Trim().Length < 6)
+            {
+                oR.message = "El password debe contener al menos seis caracteres";
+                return oR;
+            }
+
+            //Validación del dni            
+            if (usu.dni == null || usu.dni.Trim().Length == 0)
+            {
+                oR.message = "El dni es un campo requerido";
+                return oR;
+            }
+
+            if (!funciones.esNumero(usu.dni.Trim()))
+            {
+                oR.message = "El dni no puede contener letras";
+                return oR;
+            }
+
+            //Validación de la provincia
+            if (usu.fk_provincia <= 0)
+            {
+                oR.message = "Debe seleccionar una provincia";
+                return oR;
+            }
+
+            //Validación del banco
+            if (usu.fk_banco <= 0)
+            {
+                oR.message = "Debe seleccionar un banco";
+                return oR;
+            }
+
+            //Validación del cbu
+            if (usu.cbu == null || usu.cbu.Trim().Length == 0)
+            {
+                oR.message = "El cbu es un campo requerido";
+                return oR;
+            }
+
+            if (!funciones.esNumero(usu.cbu.Trim()))
+            {
+                oR.message = "El cbu no puede contener letras";
+                return oR;
+            }
+
+            //Validación de la fecha de nacimiento
+            if (usu.fechaNacimiento == null || usu.fechaNacimiento.ToString("dd/MM/yyyy") == "01/01/0001")
+            {
+                oR.message = "La fecha de nacimiento es un campo requerido";
+                return oR;
+            }
+
+            TimeSpan dias = DateTime.Now.Subtract(usu.fechaNacimiento);
+            if (dias.Days / 365 < 18)
+            {
+                oR.message = "La persona debe ser mayor a 18 años para poder operar";
+                return oR;
+            }
+
             try
             {
                 using (db = new cryptomarcaEntities())
                 {
                     //valida si existe ese correo pero con distinto id
-                    if (existeUsuario(usu.email, id)) return NotFound();
+                    if (existeUsuario(usu.email, id)) {
+                        oR.message = "El usuario ya existe";
+                        return oR;
+                    } 
                 }
 
                 using (db = new cryptomarcaEntities())
                 {
                     //recupera datos
                     usuarios usuario = db.usuarios.Where(x => x.id == id).First();
-                    if (usuario == null) return NotFound();
-
+                    if (usuario == null) {
+                        oR.message = "El usuario no existe";
+                        return oR;
+                    }
 
                     usuario.nombre = usu.nombre;
                     usuario.email = usu.email;
@@ -183,35 +351,52 @@ namespace cryptoBackend.Controllers
                     usuario.activo = usu.activo;
 
                     db.SaveChanges();
-                    return Ok();
+                    oR.status = 1;
+                    oR.data = usu;
+                    return oR;
                 }
             }
             catch (Exception e)
             {
-                return NotFound();
+                oR.data = e;
+                oR.message = "Ocurrió un problema en el servidor.";
+                return oR;
             }
         }
 
         // DELETE: api/Usuario/5
-        public IHttpActionResult Delete(int id)
+        public Respuesta Delete(int id)
         {
-            if (id <= 0) return NotFound();
+            Respuesta oR = new Respuesta();
+            oR.status = 0;
+
+            if (id <= 0) {
+                oR.message = "El id enviado no es válido";
+                return oR;
+            } 
 
             try
             {
                 using (db = new cryptomarcaEntities())
                 {
-                    if (!ModelState.IsValid) return NotFound();
+                    if (!ModelState.IsValid) {
+                        oR.message = "Ocurrió un error, no se pudo eliminar";
+                        return oR;
+                    } 
 
                     usuarios usuario = db.usuarios.Where(x => x.id == id).First();
                     db.usuarios.Remove(usuario);
                     db.SaveChanges();
-                    return Ok();
+                    oR.status = 1;
+                    oR.message = "Usuario eliminado exitosamente";
+                    return oR;
                 }
             }
             catch (Exception e)
             {
-                return NotFound();
+                oR.data = e;
+                oR.message = "Ocurrió un problema en el servidor.";
+                return oR;
             }
         }
     }

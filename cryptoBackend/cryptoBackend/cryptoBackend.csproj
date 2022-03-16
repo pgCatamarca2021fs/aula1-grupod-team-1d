@@ -216,6 +216,7 @@
     <Compile Include="Models\FuncionesComunes.cs" />
     <Compile Include="Models\GestorUsuario.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="monedas.cs">
       <DependentUpon>ModeloBD.tt</DependentUpon>

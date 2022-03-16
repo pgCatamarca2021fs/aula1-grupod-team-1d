@@ -18,19 +18,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="txtApellido" class="form-label">Apellido</label>
-                <input type="text" class="form-control" formControlName="apellido" id="txtApellido" placeholder="Tu apellido">
-                    
-                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('apellido')?.hasError('required') && registerForm.get('apellido')?.touched">
-                    El apellido <strong>es requerido</strong>
-                </div>
-        
-                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('apellido')?.hasError('minlength') && registerForm.get('apellido')?.touched">
-                    El apellido debe contener al menos <strong>tres caracteres</strong>
-                </div>
-            </div>
-
-            <div class="mb-3">
                 <label for="txtEmail" class="form-label">Email</label>
                 <input type="text" class="form-control" formControlName="email" id="txtEmail" placeholder="Tu email">
                     
@@ -44,8 +31,21 @@
             </div>
 
             <div class="mb-3">
+                <label for="txtDni" class="form-label">DNI</label>
+                <input type="text" class="form-control" formControlName="dni" id="txtDni" placeholder="Tu DNI">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('dni')?.hasError('required') && registerForm.get('dni')?.touched">
+                    El DNI <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('dni')?.hasError('minlength') && registerForm.get('dni')?.touched">
+                    El DNI debe contener <strong>ocho caracteres</strong> completando con ceros en caso de ser necesario
+                </div>
+            </div>
+
+            <div class="mb-3">
                 <label for="txtPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" formControlName="password" id="txtPassword" placeholder="Tu password">
+                <input type="password" class="form-control" formControlName="password" id="txtPassword" placeholder="Tu password" autocomplete="on">
                     
                 <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
                     El password <strong>es requerido</strong>
@@ -58,7 +58,7 @@
 
             <div class="mb-3">
                 <label for="txtRepitePassword" class="form-label">Repite Password</label>
-                <input type="password" class="form-control" formControlName="repitePassword" id="txtRepitePassword" placeholder="Repite tu password">
+                <input type="password" class="form-control" formControlName="repitePassword" id="txtRepitePassword" placeholder="Repite tu password" autocomplete="on">
                     
                 <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('repitePassword')?.hasError('required') && registerForm.get('repitePassword')?.touched">
                     Repetir el password <strong>es requerido</strong>
@@ -68,6 +68,58 @@
                     Ambos passwords deben <strong>ser iguales</strong>
                 </div>
             </div>
+
+            <div class="mb-3">
+                <label for="provincia" class="form-label">Provincia</label>
+                <select (change)="selecionarProvincia($event)" class="form-control" id="provincia" formControlName="provincia">
+                    <option [value]="null" selected disabled>Seleccione una provincia</option>
+                    <option *ngFor="let item of listProvincias" [value]="item.id"> {{item.nombre}}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="banco" class="form-label">Banco</label>
+                <select (change)="selecionarBanco($event)" class="form-control" id="banco" formControlName="banco">
+                    <option [value]="null" selected disabled>Seleccione un banco</option>                    
+                    <option *ngFor="let item of listBancos" [value]="item.id"> {{item.nombre}}</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txtCbu" class="form-label">CBU</label>
+                <input type="text" class="form-control" formControlName="cbu" id="txtCbu" placeholder="Tu CBU">
+                    
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('cbu')?.hasError('required') && registerForm.get('cbu')?.touched">
+                    El CBU <strong>es requerido</strong>
+                </div>
+        
+                <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('cbu')?.hasError('minlength') && registerForm.get('cbu')?.touched">
+                    El CBU debe contener <strong>veinte numeros</strong>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+            </div>
+
+            <div class="mb-3">
+                <div class="alert alert-danger" role="alert" *ngIf="errorSession">
+                    Ocurrió un error vuelve a intentarlo
+                </div>    
+            </div>
+  
+            <div *ngIf="spinner==true" id="spinner">
+              <div class="sk-chase">
+                  <div class="sk-chase-dot"></div>
+                  <div class="sk-chase-dot"></div>
+                  <div class="sk-chase-dot"></div>
+                  <div class="sk-chase-dot"></div>
+                  <div class="sk-chase-dot"></div>
+                  <div class="sk-chase-dot"></div>
+              </div>
+            </div>
+  
 
             <div class="d-grid d-sm-flex gap-3">
                 <button type="submit" [disabled]="registerForm.invalid" class="btn btn-success my-2">Crear Cuenta</button>
