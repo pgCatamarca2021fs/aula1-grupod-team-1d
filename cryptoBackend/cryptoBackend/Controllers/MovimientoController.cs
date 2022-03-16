@@ -68,9 +68,9 @@ namespace cryptoBackend.Controllers
                     movimientos newMovimiento = new movimientos()
                     {
                         //id = movimiento.id,
-                        fk_billeteraMoneda_Origen = movimiento.fk_billeteraMoneda_Origen,
+                        fk_billeteraMoneda_Origen = (movimiento.fk_billeteraMoneda_Origen!=0)?movimiento.fk_billeteraMoneda_Origen:null,
                         fk_billeteraMoneda_Destino = movimiento.fk_billeteraMoneda_Destino,
-                        cantidad_Origen = movimiento.cantidad_Origen,
+                        cantidad_Origen = (movimiento.cantidad_Origen!=0)?movimiento.cantidad_Origen:null,
                         cantidad_Destino = movimiento.cantidad_Destino,
                         fecha = DateTime.Now, //movimiento.fecha,
                         fk_tipoMovimiento = movimiento.fk_tipoMovimiento
