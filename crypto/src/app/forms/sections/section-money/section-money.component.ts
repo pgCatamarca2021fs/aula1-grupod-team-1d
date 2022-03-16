@@ -7,7 +7,7 @@ import { Component, Input, OnInit  } from '@angular/core';
 })
 export class SectionMoneyComponent implements OnInit {
   
-  @Input() money={precio:0,moneda:"",idBilletera:0,idMoneda:0}
+  @Input() money={cantidad:0,moneda:"",idBilletera:0,idMoneda:0}
   
   constructor() {
      

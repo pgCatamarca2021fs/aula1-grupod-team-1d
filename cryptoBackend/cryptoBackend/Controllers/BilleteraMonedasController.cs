@@ -15,34 +15,32 @@ namespace cryptoBackend.Controllers
     {
         cryptomarcaEntities db = new cryptomarcaEntities();
 
-        public IHttpActionResult Get()
+        [HttpGet]
+        [Route("api/BilleteraMonedas/getBilleteraUsuario/{idUsuario:int}")]
+        public IHttpActionResult Get(Int64 idUsuario)
         {
-            return Ok();
-        }
-
-        public IHttpActionResult Get(Int64 id)
-        {
-            if (id <= 0) return NotFound();
+            if (idUsuario <= 0) return BadRequest("IdUsuario incorrecto");
 
             try
             {
-                List<object> lBilletera = db.billeterasMonedas.Where(x => x.fk_usuario == id).Join(db.monedas,billetera=>billetera.fk_moneda,moneda=>moneda.id,(billetera,moneda)=>new {precio=billetera.cantidad,moneda=moneda.nombre,idBilletera=billetera.id,idMoneda=moneda.id }).ToList<object>();
+                List<object> lBilletera = db.billeterasMonedas.Where(x => x.fk_usuario == idUsuario).Join(db.monedas,billetera=>billetera.fk_moneda,moneda=>moneda.id,(billetera,moneda)=>new {cantidad=billetera.cantidad,moneda=moneda.nombre,idBilletera=billetera.id,idMoneda=moneda.id }).Where(x=>(x.cantidad>0 && x.moneda!="Pesos")|| x.moneda == "Pesos").ToList<object>();
                 if (lBilletera == null) return Ok();
                 return Ok(lBilletera);
             }
             catch (Exception e)
             {
-                return NotFound();
+                return BadRequest(e.Message);
             }
         }
 
-        public IHttpActionResult Post([FromBody]Operacion operacion)
+        public IHttpActionResult Post([FromBody] Operacion operacion)
         {
             billeterasMonedas billetera = new billeterasMonedas();
-            if (operacion.FkUsuario <= 0) return NotFound();
+            if (operacion == null) return BadRequest("Problemas con el envio de Datos");
+            if (operacion.FkUsuario <= 0) return BadRequest("IdUsuario incorrecto");
             //if (operacion.FkMoneda <= 0 && operacion.Destino==true) return NotFound();
-            if (operacion.TipoMovimiento <= 0) return NotFound();
-            if (operacion.Cantidad < 0) return NotFound();
+            if (operacion.TipoMovimiento <= 0)  return BadRequest("Tipo de Movimiento Incorrecto");
+            if (operacion.Cantidad < -1)  return BadRequest("Cantidad Incorrecta");
 
             try
             {
@@ -50,10 +48,7 @@ namespace cryptoBackend.Controllers
                 {
                     billetera = db.billeterasMonedas.Where(x => x.fk_usuario == operacion.FkUsuario && x.fk_moneda == operacion.FkMoneda).FirstOrDefault();
                     tipoMovimientos tipoMovimientos = db.tipoMovimientos.Where(x => x.id == operacion.TipoMovimiento).First();
-                    /*
-                    if (tipoMovimientos.descripcion == "Compra" && billetera.cantidad < operacion.Cantidad) return NotFound();
-                    if (tipoMovimientos.descripcion == "Venta" && billetera.cantidad < operacion.Cantidad) return NotFound();
-                    */
+                    
                     if(billetera==null)
                     {
                         billetera = new billeterasMonedas() {
@@ -64,31 +59,16 @@ namespace cryptoBackend.Controllers
                     }
 
                     billetera.cantidad = operacion.Cantidad;
-                    /*
-                    if (tipoMovimientos != null)
-                    {
-                        switch(tipoMovimientos.descripcion) {
-                            case "Compra":
-                            case "Transferencia":
-                                billetera.cantidad += operacion.Cantidad;
-                                break;
-                            case "Venta":
-                                billetera.cantidad -= operacion.Cantidad;
-                                break;
-                        }
-                    }*/
-
-
-                    if (billetera.id == 0) billetera=db.billeterasMonedas.Add(billetera);
-                    db.SaveChanges();
                     
+                    if (billetera.id == 0) billetera=db.billeterasMonedas.Add(billetera);
+                    db.SaveChanges();                    
                 }
 
                 return Created("Creado", billetera);
             }
             catch (Exception e)
             {
-                return NotFound();
+                return BadRequest(e.Message);
             }
         }
     }
