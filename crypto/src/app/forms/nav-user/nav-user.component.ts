@@ -28,4 +28,14 @@ export class NavUserComponent implements OnInit {
     alert('Disponible Proximamente');
   }
 
+  ultimosMovimientos(event:Event): void{
+    event.preventDefault();
+    alert('Disponible Proximamente');
+  }
+
+  datosPersonales(event:Event): void{
+    event.preventDefault();
+    alert('Disponible Proximamente');
+  }
+
 }

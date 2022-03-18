@@ -12,7 +12,7 @@
             <a class="nav-link" href="#">Home</a>
           </li>            
           <li class="nav-item">
-            <a class="nav-link" href="#">Movimientos</a>
+            <a class="nav-link" href="#" (click)="ultimosMovimientos($event)">Movimientos</a>
           </li>
           <!-- Nav  User -->          
           <li class="nav-item dropdown">
@@ -21,7 +21,7 @@
               
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#" (click)="resetPassword($event)">Datos Personales</a></li>
+              <li><a class="dropdown-item" href="#" (click)="datosPersonales($event)">Datos Personales</a></li>
               <li><a class="dropdown-item" href="#" (click)="resetPassword($event)">Reset Password</a></li>
               <hr class="dropdown-divider bg-light">
               <li><a class="dropdown-item" href="#" (click)="logout()">Cerrar Sesion</a></li>
