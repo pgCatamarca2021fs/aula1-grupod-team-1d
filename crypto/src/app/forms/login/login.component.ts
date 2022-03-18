@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class LoginComponent implements OnInit {
   errorSession: boolean = false;
   spinner:boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private loginService:LoginService, private cookie: CookieService) {
+  constructor(private fb: FormBuilder, private router: Router, private loginService:LoginService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]

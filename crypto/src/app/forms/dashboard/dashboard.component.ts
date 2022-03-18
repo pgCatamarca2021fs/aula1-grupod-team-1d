@@ -38,8 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.listObservers$.forEach(u => u.unsubscribe())
-    console.log('🔴🔴🔴🔴🔴🔴🔴 Chau suscripción!');
+    this.listObservers$.forEach(u => u.unsubscribe())    
   }
 
   walletAll(walletResponse:boolean) {
