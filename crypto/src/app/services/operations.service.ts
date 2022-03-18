@@ -17,7 +17,7 @@ export class OperationsService {
   
   constructor(private http:HttpClient) { 
     let configApp=new ConfigApp();
-    this.urlApi=configApp.urlApi+"/Movimiento/";
+    this.urlApi=configApp.urlApi+"Movimiento/";
     this.operation=[];
   }
 

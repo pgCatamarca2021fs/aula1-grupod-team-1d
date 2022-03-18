@@ -115,7 +115,7 @@ export class OperationPanelComponent implements OnInit {
     
 
     let operaDestino:Operation=new Operation(this.idUsuario,idMoney,movementType,quantity,false);
-    console.log(operaDestino);
+    //console.log(operaDestino);
     
     let operaOrigen:Operation=new Operation(this.idUsuario,0,0,0,false);
     
@@ -191,7 +191,7 @@ export class OperationPanelComponent implements OnInit {
               "fk_tipoMovimiento":movementType
             };
           }
-          console.log("movmiento:",movimiento);
+          //console.log("movmiento:",movimiento);
           await this.operationsServ.post(movimiento).subscribe(async(data:any)=>{
             if(data==undefined) { this.displayError("Ocurrio un Error en Movimiento"); return;}
             if(data.Message!=undefined) { this.displayError("Movimiento:"+data.Message); return;}
@@ -237,14 +237,14 @@ export class OperationPanelComponent implements OnInit {
     
     let moneyIndex=this.listMoney.findIndex((x:any)=> Number(x.id)==Number(idMoney));
 
-    console.log(idMoney);
-    console.log(this.listMoney);
+    //console.log(idMoney);
+    //console.log(this.listMoney);
     
-    console.log(moneyIndex);
+    //console.log(moneyIndex);
 
     
     const money= this.listMoney[moneyIndex]["nombre"]; 
-    console.log(money);
+    //console.log(money);
 
     this.onOperation(event,money,idMoney,movementType,quantity);
     
@@ -256,7 +256,7 @@ export class OperationPanelComponent implements OnInit {
     const money= this.listMoney[moneyIndex]["nombre"];
     let moneyValueCurrent=this.findCurrentMoney(money);
     const quantity:number = this.form.get('quantity')?.value;
-    console.log(moneyValueCurrent)
+    //console.log(moneyValueCurrent)
     if(this.classSelect=="compra"){
       this.valueCalc=Number((Number(quantity)/Number(moneyValueCurrent[1])).toFixed(6));
     }
