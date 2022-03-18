@@ -10,7 +10,8 @@ import { OperationsService } from 'src/app/services/operations.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  idUsuario = Number(localStorage.getItem('id'));
+  idUsuario = Number(JSON.parse(localStorage.getItem('currentUser') as string).id);  
+  
   wallet:any; 
   refreshGrid : boolean = false;
   public resultados:any[] = [];
@@ -19,7 +20,9 @@ export class DashboardComponent implements OnInit {
   
   constructor(private walletServ:WalletService, private ultimasCotizacionesService:UltimasCotizacionesService,private operationsServ:OperationsService) {this.wallet=[];  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
+    console.log(this.idUsuario);
+      
     this.walletServ.getBilleteraUsuario(this.idUsuario).subscribe(data=>{ this.wallet=data; console.log(data); });
     this.operationsServ.get(this.idUsuario).subscribe(data=>{  this.operations=data; });
     
