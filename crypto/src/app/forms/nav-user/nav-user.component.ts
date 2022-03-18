@@ -8,13 +8,34 @@ import { UserServicesService } from 'src/app/services/user-services.service';
 })
 
 export class NavUserComponent implements OnInit {
-  idUsuario = Number(localStorage.getItem('id'));
+  nombreUsuario = JSON.parse(localStorage.getItem('currentUser') as string).nombre;
+  idUsuario = JSON.parse(localStorage.getItem('currentUser') as string).id;
+  
   @Output() usuario="";
   user:any;
   constructor(private userServ:UserServicesService) { }
 
   ngOnInit(): void {
     this.userServ.get(this.idUsuario).subscribe((data:any)=>{ this.user=data; });
+  }
+
+  logout():void{
+    localStorage.removeItem('currentUser');
+  }
+
+  resetPassword(event:Event): void{
+    event.preventDefault();
+    alert('Disponible Proximamente');
+  }
+
+  ultimosMovimientos(event:Event): void{
+    event.preventDefault();
+    alert('Disponible Proximamente');
+  }
+
+  datosPersonales(event:Event): void{
+    event.preventDefault();
+    alert('Disponible Proximamente');
   }
 
 }

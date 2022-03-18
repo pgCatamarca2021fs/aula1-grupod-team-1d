@@ -33,11 +33,15 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (responseOK) => {         
           console.log(responseOK);
-          if(responseOK.email != ""){            
-            localStorage.setItem('id', responseOK.lista[0].id);  
-            localStorage.setItem('email', responseOK.email);  
-            localStorage.setItem('token', responseOK.token);   
-
+          if(responseOK.email != ""){    
+            const currentUser = {
+              id: responseOK.lista[0].id,
+              email: responseOK.email,
+              token: responseOK.token,
+              nombre: responseOK.lista[0].nombre
+            }
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));          
+            
             this.spinner = false;
             this.router.navigate(['/dashboard']);
             console.log('Sesion iniciada correcta');
