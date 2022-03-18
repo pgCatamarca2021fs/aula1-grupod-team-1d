@@ -19,7 +19,7 @@ export class OperationPanelComponent implements OnInit {
   
   moneySel:string="";
   valueCalc:number=0;
-  idUsuario = Number(localStorage.getItem('id'));
+  idUsuario = Number(JSON.parse(localStorage.getItem('currentUser') as string).id);  
   listMovementTypes:any;
   listMoney:any;
   listMoneyO:any;
@@ -115,6 +115,8 @@ export class OperationPanelComponent implements OnInit {
     
 
     let operaDestino:Operation=new Operation(this.idUsuario,idMoney,movementType,quantity,false);
+    console.log(operaDestino);
+    
     let operaOrigen:Operation=new Operation(this.idUsuario,0,0,0,false);
     
     if(this.classSelect=="transferencia"){
@@ -217,9 +219,15 @@ export class OperationPanelComponent implements OnInit {
   
   onSubmitForm(event:Event):void{
     event.preventDefault();
+    
+    
     const idMoney:number = this.form.get('money')?.value;
     const movementType:number = this.form.get('movementType')?.value | 0;
     const quantity:number = this.form.get('quantity')?.value;
+
+    
+    
+    
     
     if(movementType==0) {this.displayError("Seleccione Tipo de Movimiento");return;}
     if(idMoney==0) {this.displayError("Seleccione Moneda");return;}
@@ -228,8 +236,18 @@ export class OperationPanelComponent implements OnInit {
     if(Number(quantity.toFixed(6))<=0){ this.displayError("Ingrese Cantidad con menos de 6 digitos Decimales");return;}
     
     let moneyIndex=this.listMoney.findIndex((x:any)=> Number(x.id)==Number(idMoney));
+
+    console.log(idMoney);
+    console.log(this.listMoney);
+    
+    console.log(moneyIndex);
+
+    
     const money= this.listMoney[moneyIndex]["nombre"]; 
+    console.log(money);
+
     this.onOperation(event,money,idMoney,movementType,quantity);
+    
   }
 
   onCalc(event:Event):void{

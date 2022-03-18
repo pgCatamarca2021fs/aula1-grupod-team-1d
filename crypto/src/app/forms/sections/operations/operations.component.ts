@@ -46,7 +46,7 @@ export class OperationsComponent implements OnInit {
   @Input() refreshGrid : boolean = false;
   @Output () operationsResponse: EventEmitter<boolean> = new EventEmitter();
   @Input() operations:any; 
-  idUsuario = Number(localStorage.getItem('id'));
+  idUsuario = Number(JSON.parse(localStorage.getItem('currentUser') as string).id);  
   operationsReadable: any;
   wallets: any;
   coins: any;

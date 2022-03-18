@@ -10,7 +10,8 @@ import { OperationsService } from 'src/app/services/operations.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  idUsuario = Number(localStorage.getItem('id'));
+  idUsuario = Number(JSON.parse(localStorage.getItem('currentUser') as string).id);  
+  
   wallet:any; 
   refreshGrid : boolean = false;
   public resultados:any[] = [];
