@@ -19,7 +19,7 @@
 
           <div class="mb-3">
               <label for="txtPassword" class="form-label">Password</label>
-              <input type="password" class="form-control mb-3" formControlName="password" id="txtPassword" placeholder="Password">
+              <input type="password" class="form-control mb-3" formControlName="password" id="txtPassword" placeholder="Password" autocomplete="on">
 
               <div class="alert alert-danger mt-3" role="alert" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
                 El password <strong>es requerido</strong>
