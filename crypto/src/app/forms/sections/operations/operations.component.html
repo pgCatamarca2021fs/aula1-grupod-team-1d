@@ -9,10 +9,10 @@
     </thead>
     <tbody >
       <tr *ngFor="let operation of operations">
-        <td>{{operation.fecha}}</td>
-        <td>{{operation.cantidad_Origen}}</td>
-        <td>{{operation.cantidad_Destino}}</td>        
-        <td>{{operation.fk_tipoMovimiento}}</td>
+        <td>{{operation.fecha| date: 'dd/MM/yyyy hh:mm a' }}</td>
+        <td>{{operation.monedaOrigen}} - {{operation.cantidadOrigen}} </td>
+        <td>{{operation.monedaDestino}} - {{operation.cantidadDestino}}</td>        
+        <td>{{operation.tipoMovimiento}}</td>
         
       </tr>
     </tbody>

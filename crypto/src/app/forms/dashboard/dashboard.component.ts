@@ -20,10 +20,8 @@ export class DashboardComponent implements OnInit {
   
   constructor(private walletServ:WalletService, private ultimasCotizacionesService:UltimasCotizacionesService,private operationsServ:OperationsService) {this.wallet=[];  }
 
-  ngOnInit(): void {  
-    console.log(this.idUsuario);
-      
-    this.walletServ.getBilleteraUsuario(this.idUsuario).subscribe(data=>{ this.wallet=data; console.log(data); });
+  ngOnInit(): void {
+    this.walletServ.getBilleteraUsuario(this.idUsuario).subscribe(data=>{ this.wallet=data; });
     this.operationsServ.get(this.idUsuario).subscribe(data=>{  this.operations=data; });
     
     this.ultimasCotizacionesService.getCotizaciones()
@@ -45,11 +43,11 @@ export class DashboardComponent implements OnInit {
   }
 
   walletAll(walletResponse:boolean) {
-    console.log(walletResponse);
+    //console.log(walletResponse);
     this.walletServ.getBilleteraUsuario(this.idUsuario).subscribe(data=>{ 
-      this.wallet=data;
+    this.wallet=data;
     
-    this.operationsServ.get(this.idUsuario).subscribe(data=>this.operations=data);
+    this.operationsServ.get(this.idUsuario).subscribe(data=>this.operations=data);    
     });
     this.refreshGrid = true;
   }

@@ -17,33 +17,65 @@ namespace cryptoBackend.Controllers
     {
         cryptomarcaEntities db = new cryptomarcaEntities();
 
-        // GET: api/Movimiento
-        public IHttpActionResult Get()
+        [HttpGet]
+        [Route("api/Movimiento/getMovimientoUsuario/{idUsuario:int}")]
+        public IHttpActionResult Get(Int64 idUsuario)
         {
-            /*try
-            {
-                List<movimientos> lmovimientos = db.movimientos.ToList();
-                return Ok(lmovimientos);
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }*/
-            return NotFound();
-        }
-
-        // GET: api/Movimiento/5
-        public IHttpActionResult Get(Int64 id)
-        {
-            if (id <= 0) return NotFound();
+            if (idUsuario <= 0) return BadRequest("Parametro idUsuario Incorrecto.");
 
             try
             {
-                string query = "select distinct [dbo].[movimientos].* from [dbo].[movimientos], [dbo].[billeterasMonedas] where( [dbo].[movimientos].[fk_billeteraMoneda_Destino] = [dbo].[billeterasMonedas].[id] and[dbo].[billeterasMonedas].[fk_usuario] = {0}) or( [dbo].[movimientos].[fk_billeteraMoneda_Origen] = [dbo].[billeterasMonedas].[id] and[dbo].[billeterasMonedas].[fk_usuario] = {0} ) or( [dbo].[movimientos].[fk_billeteraMoneda_Destino] = [dbo].[billeterasMonedas].[id] and[dbo].[movimientos].[fk_billeteraMoneda_Origen] = [dbo].[billeterasMonedas].[id] and[dbo].[billeterasMonedas].[fk_usuario] = {0})";
-                List <movimientos> movimiento = db.movimientos.SqlQuery(query, id).ToList();
+                //string query = "select distinct [dbo].[movimientos].* from [dbo].[movimientos], [dbo].[billeterasMonedas] where( [dbo].[movimientos].[fk_billeteraMoneda_Destino] = [dbo].[billeterasMonedas].[id] and[dbo].[billeterasMonedas].[fk_usuario] = {0}) or( [dbo].[movimientos].[fk_billeteraMoneda_Origen] = [dbo].[billeterasMonedas].[id] and[dbo].[billeterasMonedas].[fk_usuario] = {0} ) or( [dbo].[movimientos].[fk_billeteraMoneda_Destino] = [dbo].[billeterasMonedas].[id] and[dbo].[movimientos].[fk_billeteraMoneda_Origen] = [dbo].[billeterasMonedas].[id] and[dbo].[billeterasMonedas].[fk_usuario] = {0})";
+                
+                /*string query = "SELECT DISTINCT m.*,bi.* FROM movimientos m "+
+                                "JOIN billeterasMonedas b on(m.fk_billeteraMoneda_Destino = b.id) "+
+                                " or(m.fk_billeteraMoneda_Origen = b.id)"+
+                                " WHERE b.fk_usuario = {0}";
+                */
+                var lmovimientos =
+                            (
+                           db.billeterasMonedas.Where(xx => xx.fk_usuario == idUsuario)
+                           .Join(db.movimientos, xx => xx.id, mo => mo.fk_billeteraMoneda_Destino, (xx, mo) => new { mo.id, mo.fecha, mo.fk_billeteraMoneda_Origen, mo.cantidad_Origen, mo.fk_billeteraMoneda_Destino, mo.cantidad_Destino, mo.fk_tipoMovimiento })
+                           )
+                            .Concat(
+                                (
+                                db.billeterasMonedas.Where(xx => xx.fk_usuario == idUsuario)
+                                .Join(db.movimientos, xx => xx.id, mo => mo.fk_billeteraMoneda_Origen, (xx, mo) => new { mo.id, mo.fecha, mo.fk_billeteraMoneda_Origen, mo.cantidad_Origen, mo.fk_billeteraMoneda_Destino, mo.cantidad_Destino, mo.fk_tipoMovimiento })
+                                )
+                            )
+                            .Join(db.tipoMovimientos, mo => mo.fk_tipoMovimiento, tt => tt.id, (mo, tt) => new { mo.id, mo.fecha, mo.fk_billeteraMoneda_Origen, mo.cantidad_Origen, mo.fk_billeteraMoneda_Destino, mo.cantidad_Destino, mo.fk_tipoMovimiento ,tipoMovimiento = tt.descripcion })
+                           .OrderBy(xx=>xx.id)
+                           .Distinct();
 
-                if (movimiento == null) return Ok();
-                return Ok(movimiento);
+                List<object> listado = new List<object>();
+                foreach(var obj in lmovimientos)
+                {
+                    var monedaDestino = db.billeterasMonedas.Where(xx => xx.id == obj.fk_billeteraMoneda_Destino).Join(db.monedas, xx => xx.fk_moneda, mo => mo.id, (xx, mo) => new { mo.id, nombre = mo.nombre }).First();
+                    var monedaOrigen = monedaDestino;
+
+                    if (obj.fk_billeteraMoneda_Origen != null)
+                    {
+                        monedaOrigen = db.billeterasMonedas.Where(xx => xx.id == obj.fk_billeteraMoneda_Origen).Join(db.monedas, xx => xx.fk_moneda, mo => mo.id, (xx, mo) => new { mo.id, nombre = mo.nombre }).FirstOrDefault();
+                    }
+
+                    object dyn = new
+                    {
+                        id = obj.id,
+                        fecha = obj.fecha,
+                        monedaOrigen = (obj.fk_billeteraMoneda_Origen != null ? monedaOrigen.nombre.ToString() : null),
+                        cantidadOrigen = obj.cantidad_Origen,
+                        monedaDestino = monedaDestino.nombre.ToString(),
+                        cantidadDestino = obj.cantidad_Destino,
+                        tipoMovimiento=obj.tipoMovimiento
+                    };
+
+                    listado.Add(dyn);
+                }
+                            //.Join(db.movimientos, xx => xx.id, mo => mo.fk_billeteraMoneda_Origen, (xx, mo) => new { xx.id, mo.fecha, mo.fk_billeteraMoneda_Origen, mo.cantidad_Origen, mo.fk_billeteraMoneda_Destino, mo.cantidad_Destino, mo.fk_tipoMovimiento })
+                           //.Concat(db.billeterasMonedas.Where(xx => xx.fk_usuario == idUsuario).Join(db.movimientos, xx => xx.id, mo => mo.fk_billeteraMoneda_Destino, (xx, mo) => new { xx.id, mo.fecha, mo.fk_billeteraMoneda_Origen, mo.cantidad_Origen, mo.fk_billeteraMoneda_Destino, mo.cantidad_Destino, mo.fk_tipoMovimiento }))
+                           // .GroupBy(c => c.id, (key, c) => c.FirstOrDefault())
+                           ;
+                return Ok(listado);
             }
             catch (Exception e)
             {
