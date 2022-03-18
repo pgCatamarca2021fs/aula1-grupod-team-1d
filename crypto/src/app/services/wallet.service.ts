@@ -14,12 +14,12 @@ export class WalletService {
   
   constructor(private http:HttpClient) { 
     let conf:ConfigApp=new ConfigApp();
-    this.urlApi=conf.urlApi+'BilleteraMonedas';
+    this.urlApi=conf.urlApi+'BilleteraMonedas/';
     this.wallet=[];
   }
 
   getBilleteraUsuario(idUsuario:number){
-    return this.http.get(this.urlApi+'/getBilleteraUsuario/'+idUsuario);
+    return this.http.get(this.urlApi+'getBilleteraUsuario/'+idUsuario);
   }
   
   post(opera:Operation):Observable<any>{
