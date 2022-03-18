@@ -144,7 +144,6 @@ export class OperationPanelComponent implements OnInit {
 
     //guardar
     await this.walletServ.post(operaDestino).subscribe(async(data:any)=>{
-      
       if(data==undefined) { this.displayError("Ocurrio un Error en Moneda Destino"); return;}
       if(data.Message!=undefined) { this.displayError("Moneda Destino:"+data.Message); return;}
 
@@ -182,7 +181,7 @@ export class OperationPanelComponent implements OnInit {
           if(this.classSelect=="venta"){
             movimiento = {
               "id":0,
-              "fk_billeteraMoneda_Origen": data.id,
+              "fk_billeteraMoneda_Origen": idBilleteraDestino,
               "fk_billeteraMoneda_Destino": moneyPesos.idBilletera,
               "cantidad_Origen": quantity,
               "cantidad_Destino": quantity*moneyValueCurrent[1],
@@ -190,6 +189,7 @@ export class OperationPanelComponent implements OnInit {
               "fk_tipoMovimiento":movementType
             };
           }
+          console.log("movmiento:",movimiento);
           await this.operationsServ.post(movimiento).subscribe(async(data:any)=>{
             if(data==undefined) { this.displayError("Ocurrio un Error en Movimiento"); return;}
             if(data.Message!=undefined) { this.displayError("Movimiento:"+data.Message); return;}
@@ -224,6 +224,8 @@ export class OperationPanelComponent implements OnInit {
     if(movementType==0) {this.displayError("Seleccione Tipo de Movimiento");return;}
     if(idMoney==0) {this.displayError("Seleccione Moneda");return;}
     if(quantity<=0){ this.displayError("Ingrese Cantidad");return;}
+    
+    if(Number(quantity.toFixed(6))<=0){ this.displayError("Ingrese Cantidad con menos de 6 digitos Decimales");return;}
     
     let moneyIndex=this.listMoney.findIndex((x:any)=> Number(x.id)==Number(idMoney));
     const money= this.listMoney[moneyIndex]["nombre"]; 
