@@ -33,6 +33,7 @@ mensajeEnviado:boolean = false;
     this.spinner = true;
 
     setTimeout(()=>{
+      this.contactForm.reset();
       this.spinner = false;
       this.mensajeEnviado = true;
 
