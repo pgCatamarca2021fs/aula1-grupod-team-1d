@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   provinciaSeleccionada: any;
   bancoSeleccionado: any;
   fechaNacimientoSeleccionada: Date = new Date();
+  mensajeError:any;
 
   constructor(private fb: FormBuilder, private router: Router, private provinciasServ: ProvinciasService, private bancosServ: BancosService, private registerServ:RegisterService) {
     this.registerForm = this.fb.group({
@@ -74,17 +75,27 @@ export class RegisterComponent implements OnInit {
           console.log('Registro correcto');          
           
         } else {
+          this.errorSession = true;       
           this.spinner = false;
+          this.mensajeError = data.message;
+
+          setTimeout(()=>{
+            this.mensajeError = '';
+            this.errorSession = false;
+          },3000);
         }
-        //alert("ok");
-        // this.operationsServ.initializeData();
       });     
       this.spinner = false;
 
     } else {
-      console.log('Ocurrio un error con el registro');  
       this.errorSession = true;       
+      this.mensajeError = 'Ocurrio un error con el registro';
       this.spinner = false;
+
+      setTimeout(()=>{
+        this.mensajeError = '';
+        this.errorSession = false;
+      },3000);
     }
   }
 

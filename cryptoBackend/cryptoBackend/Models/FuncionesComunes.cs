@@ -16,7 +16,7 @@ namespace cryptoBackend.Models
 
         public bool esLetra(string campo)
         {
-            return Regex.IsMatch(campo, @"^[a-zA-Z]+$");
+            return Regex.IsMatch(campo, @"^[a-z A-Z]+$");
         }
 
         public bool esNumero(string campo)
